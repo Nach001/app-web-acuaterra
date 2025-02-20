@@ -4,7 +4,8 @@ import type { User } from "../common/types";
 
 const useUsers = (
 	page: number,
-	pageSize: number
+	pageSize: number,
+	reload: boolean
 ): { users: Array<User>; loading: boolean; error: string } => {
 	const [users, setUsers] = useState<Array<User>>([]);
 	const [loading, setLoading] = useState(true);
@@ -27,7 +28,7 @@ const useUsers = (
 		fetchUsersData().catch((error) => {
 			console.error("Error fetching users:", error);
 		});
-	}, [page, pageSize]);
+	}, [page, pageSize, reload]);
 
 	return { users, loading, error };
 };

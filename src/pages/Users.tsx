@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { FunctionComponent } from "../common/types";
+import type { FunctionComponent, UserRequest } from "../common/types";
 import UserTable from "../components/ui/table/table";
 import useUsers from "../hooks/useUsers";
 import { useState } from "react";
@@ -10,8 +10,9 @@ export const Users = (): FunctionComponent => {
 	const { t, i18n } = useTranslation();
 	const [page, setPage] = useState(1);
 	const [showModal, setShowModal] = useState(false);
+	const [reload, setReload] = useState(false);
 	const pageSize = 10;
-	const { users, loading, error } = useUsers(page, pageSize);
+	const { users, loading, error } = useUsers(page, pageSize, reload);
 	const {registerUser} = useRegisterUser();
 
 
@@ -22,6 +23,12 @@ export const Users = (): FunctionComponent => {
 			await i18n.changeLanguage("en");
 		}
 	};
+
+	const handleRegisterUser = async (userData: UserRequest): Promise<void> => {
+        await registerUser(userData);
+        setReload(!reload); 
+        setShowModal(false); 
+    };
 
 	return (
 		<div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
@@ -66,7 +73,7 @@ export const Users = (): FunctionComponent => {
 			<RegisterUserModal
                 setShowModal={setShowModal}
                 showModal={showModal}
-                onRegister={registerUser}
+                onRegister={handleRegisterUser}
             />
 		</div>
 	);
