@@ -11,10 +11,10 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { UserRoute as UsersImport } from './routes/users'
-import { MooduleRoute as ModuleImport } from './routes/module'
-import { AuthRoute as AuthImport } from './routes/auth'
-import { AboutRoute as AboutImport } from './routes/about'
+import { Route as UsersImport } from './routes/users'
+import { Route as ModuleImport } from './routes/module'
+import { Route as AuthImport } from './routes/auth'
+import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
