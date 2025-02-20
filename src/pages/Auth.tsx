@@ -14,6 +14,7 @@ export const Auth: FunctionComponent = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
+	const [loading, setLoading] = useState(false);
 
 	const onTranslateButtonClick = async (): Promise<void> => {
 		if (i18n.resolvedLanguage === "en") {
@@ -24,6 +25,7 @@ export const Auth: FunctionComponent = () => {
 	};
 
 	const handleLogin = async (): Promise<void> => {
+		setLoading(true);
 		try {
 			const response = await fetch(`${API_BASE_URL}/users/loginMVC`, {
 				method: "POST",
@@ -43,11 +45,13 @@ export const Auth: FunctionComponent = () => {
 		} catch (error) {
 			setError("Invalid email or password");
 			console.error(error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	return (
-		<div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
+		<div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center transition-opacity duration-100 ease-in-out">
 			<p className="text-white text-6xl">{t("home.greeting")}</p>
 			<ButtonComponent type="button" onClick={onTranslateButtonClick}>
 				translate text button
@@ -72,8 +76,8 @@ export const Auth: FunctionComponent = () => {
 					setPassword(_.target.value);
 				}}
 			/>
-			<ButtonComponent type="button" onClick={handleLogin}>
-				Login
+			<ButtonComponent disabled={loading} type="button" onClick={handleLogin}>
+				{loading ? "Loading..." : "Login"}
 			</ButtonComponent>
 		</div>
 	);

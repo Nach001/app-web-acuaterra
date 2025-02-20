@@ -4,11 +4,12 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   onClick?: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
+  disabled?: boolean;
 }
 
-const ButtonComponent: FC<ButtonProps> = ({ type = 'button', onClick, children }) => {
+const ButtonComponent: FC<ButtonProps> = ({ type = 'button', onClick, children, disabled = false }) => {
   return (
-    <button className="button-component" type={type} onClick={onClick}>
+    <button className="button-component" disabled={disabled} type={type} onClick={onClick}>
       {children}
     </button>
   );
