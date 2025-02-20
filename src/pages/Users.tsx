@@ -4,6 +4,7 @@ import UserTable from "../components/ui/table/table";
 import useUsers from "../hooks/useUsers";
 import { useState } from "react";
 import RegisterUserModal from "../components/ui/modals/registerUserModal";
+import useRegisterUser from "../hooks/useRegisterUser";
 
 export const Users = (): FunctionComponent => {
 	const { t, i18n } = useTranslation();
@@ -11,6 +12,8 @@ export const Users = (): FunctionComponent => {
 	const [showModal, setShowModal] = useState(false);
 	const pageSize = 10;
 	const { users, loading, error } = useUsers(page, pageSize);
+	const {registerUser} = useRegisterUser();
+
 
 	const onTranslateButtonClick = async (): Promise<void> => {
 		if (i18n.resolvedLanguage === "en") {
@@ -61,10 +64,10 @@ export const Users = (): FunctionComponent => {
 				</button>
 			</div>
 			<RegisterUserModal
-				setShowModal={setShowModal}
-				showModal={showModal}
-				onRegister={() => {}}
-			/>
+                setShowModal={setShowModal}
+                showModal={showModal}
+                onRegister={registerUser}
+            />
 		</div>
 	);
 };

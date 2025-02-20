@@ -54,3 +54,15 @@ export interface User {
 	instructor_ficha: string | null;
 	instructor_programa: string | null;
 }
+export interface UserRequest {
+	nombre: string;
+	email: string;
+	password: string;
+	n_documento_identidad: string;
+	sede: string;
+	rol: number;
+	n_ficha: string;
+	jornada: string;
+	nombre_del_programa: string;
+}
+
