@@ -60,7 +60,7 @@ export interface UserRequest {
 	password: string;
 	n_documento_identidad: string;
 	sede: string;
-	rol: number;
+	id_rol: number;
 	n_ficha: string;
 	jornada: string;
 	nombre_del_programa: string;

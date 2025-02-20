@@ -54,3 +54,18 @@ export const deleteUser = async (userId: number): Promise<void> => {
         throw new Error("Network response was not ok");
     }
 };
+
+export const updateUser = async (userId: number, userData: UserRequest): Promise<void> => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+        method: "PUT",
+        headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+    });
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+};
