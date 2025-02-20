@@ -5,7 +5,17 @@ import { useState } from "react";
 interface RegisterUserModalProps {
 	showModal: boolean;
 	setShowModal: (show: boolean) => void;
-	onRegister: (user: { nombre: string; email: string; password: string; n_documento_identidad: string; sede: string; rol: number; n_ficha: string; jornada: string; nombre_del_programa: string; }) => void;
+	onRegister: (user: {
+		nombre: string;
+		email: string;
+		password: string;
+		n_documento_identidad: string;
+		sede: string;
+		rol: number;
+		n_ficha: string;
+		jornada: string;
+		nombre_del_programa: string;
+	}) => void;
 }
 
 const RegisterUserModal: React.FC<RegisterUserModalProps> = ({

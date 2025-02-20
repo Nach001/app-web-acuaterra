@@ -4,20 +4,13 @@ import UserTable from "../components/ui/table/table";
 import useUsers from "../hooks/useUsers";
 import { useState } from "react";
 import RegisterUserModal from "../components/ui/modals/registerUserModal";
-import SearchBar from "../components/ui/searchBar/searchBar";
-import useRegisterUser from "../hooks/useRegisterUser";
 
 export const Users = (): FunctionComponent => {
 	const { t, i18n } = useTranslation();
 	const [page, setPage] = useState(1);
-	const [searchTerm, setSearchTerm] = useState("");
 	const [showModal, setShowModal] = useState(false);
 	const pageSize = 10;
-	const { users, loading, error } = useUsers(
-		page,
-		pageSize,
-	);
-
+	const { users, loading, error } = useUsers(page, pageSize);
 
 	const onTranslateButtonClick = async (): Promise<void> => {
 		if (i18n.resolvedLanguage === "en") {
@@ -27,7 +20,6 @@ export const Users = (): FunctionComponent => {
 		}
 	};
 
-
 	return (
 		<div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
 			<p className="text-white text-6xl">{t("home.greeting")}</p>
@@ -35,10 +27,11 @@ export const Users = (): FunctionComponent => {
 				translate
 			</button>
 			<div className="flex flex-col items-center mt-4">
-				<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 				<button
 					className="mb-4 p-2 bg-green-500 text-white"
-					onClick={() => { setShowModal(true); }}
+					onClick={() => {
+						setShowModal(true);
+					}}
 				>
 					Register User
 				</button>
@@ -70,7 +63,7 @@ export const Users = (): FunctionComponent => {
 			<RegisterUserModal
 				setShowModal={setShowModal}
 				showModal={showModal}
-				onRegister={(newUser) => {}}
+				onRegister={() => {}}
 			/>
 		</div>
 	);

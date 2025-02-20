@@ -1,20 +1,22 @@
-import type React from 'react';
-
-interface SearchBarProps {
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
+interface SearchModuleInputProps {
+	onSearchChange: (value: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm }) => {
-  return (
-    <input
-      className="mb-4 p-2"
-      placeholder="Search by name"
-      type="text"
-      value={searchTerm}
-      onChange={(_) => { setSearchTerm(_.target.value); }}
-    />
-  );
+const SearchModuleInput = ({
+	onSearchChange,
+}: SearchModuleInputProps): JSX.Element | null => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+		onSearchChange(event.target.value);
+	};
+
+	return (
+		<input
+			className="search-input"
+			placeholder="Buscar módulo por nombre"
+			type="text"
+			onChange={handleChange}
+		/>
+	);
 };
 
-export default SearchBar;
+export default SearchModuleInput;
