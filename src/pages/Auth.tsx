@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import type { FunctionComponent } from "react";
-import ButtonComponent from "../components/ui/button/Button";
+import ButtonComponent from "../components/ui/button/button";
 import InputCustomComponent from "../components/ui/input/input";
 import { useNavigate } from "@tanstack/react-router";
 // eslint-disable-next-line no-duplicate-imports
