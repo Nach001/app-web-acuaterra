@@ -40,3 +40,17 @@ export interface UpdateModuleRequest {
 	dimensiones: string;
 	id_persona: number;
 }
+
+export interface User {
+	id_persona: number;
+	nombre: string;
+	email: string;
+	n_documento_identidad: string;
+	sede: string;
+	rol: string;
+	usuario_ficha: string | null;
+	jornada: string | null;
+	usuario_programa: string | null;
+	instructor_ficha: string | null;
+	instructor_programa: string | null;
+}
