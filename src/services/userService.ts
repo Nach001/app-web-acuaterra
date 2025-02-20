@@ -41,3 +41,16 @@ export const createUser = async (userData: UserRequest): Promise<ModuleResponse>
     return response.json() as Promise<ModuleResponse>;
 }
 
+export const deleteUser = async (userId: number): Promise<void> => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+        },
+    });
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+};

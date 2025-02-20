@@ -5,6 +5,7 @@ import useUsers from "../hooks/useUsers";
 import { useState } from "react";
 import RegisterUserModal from "../components/ui/modals/registerUserModal";
 import useRegisterUser from "../hooks/useRegisterUser";
+import { deleteUser } from "../services/userService";
 
 export const Users = (): FunctionComponent => {
 	const { t, i18n } = useTranslation();
@@ -30,6 +31,11 @@ export const Users = (): FunctionComponent => {
         setShowModal(false); 
     };
 
+	const handleDeleteUser = async (userId: number): Promise<void> => {
+        await deleteUser(userId);
+        setReload(!reload); // Toggle reload state to trigger useEffect in useUsers hook
+    };
+
 	return (
 		<div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
 			<p className="text-white text-6xl">{t("home.greeting")}</p>
@@ -50,7 +56,7 @@ export const Users = (): FunctionComponent => {
 			{error && <p>Error: {String(error)}</p>}
 			{!loading && !error && (
 				<div className="overflow-y-auto max-h-96 w-full">
-					<UserTable users={users} />
+					<UserTable users={users} onDeleteUser={handleDeleteUser}/>
 				</div>
 			)}
 			<div className="flex justify-between mt-4">
