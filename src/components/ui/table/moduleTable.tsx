@@ -1,61 +1,42 @@
 import type React from "react";
-import ButtonComponent from "../button/button";
-import type { Module } from "../../../common/types";
+import type { Module as ModuleType } from "../../../common/types";
 
 interface ModuleTableProps {
-	modules: Array<Module>;
-	onEdit: (module: Module) => void;
-	onDelete: (id: number) => void;
+    modules: Array<ModuleType>;
+    onDelete: (moduleId: number) => void;
+    onEdit: (module: ModuleType) => void;
 }
 
-const ModuleTable: React.FC<ModuleTableProps> = ({
-	modules,
-	onEdit,
-	onDelete,
-}) => {
-	return (
-		<table className="module-table">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Ubicación</th>
-					<th>Especie</th>
-					<th>Cantidad</th>
-					<th>Edad</th>
-					<th>Dimensiones</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				{modules.map((module) => (
-					<tr key={module.id_modulo}>
-						<td>{module.nombre}</td>
-						<td>{module.ubicacion}</td>
-						<td>{module.especie_pescados}</td>
-						<td>{module.cantidad_pescados}</td>
-						<td>{module.edad_pescados}</td>
-						<td>{module.dimensiones}</td>
-						<td>
-							<ButtonComponent
-								onClick={() => {
-									onEdit(module);
-								}}
-							>
-								Editar
-							</ButtonComponent>
-							<ButtonComponent
-								onClick={() => {
-									onDelete(module.id_modulo);
-								}}
-							>
-								Eliminar
-							</ButtonComponent>
-						</td>
-					</tr>
-				))}
-			</tbody>
-		</table>
-	);
+const ModuleTable: React.FC<ModuleTableProps> = ({ modules, onDelete, onEdit }) => {
+    return (
+        <table className="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th className="py-2">ID</th>
+                    <th className="py-2">Nombre</th>
+                    <th className="py-2">Descripción</th>
+                    <th className="py-2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {modules.map((module) => (
+                    <tr key={module.id_modulo}>
+                        <td className="py-2">{module.id_modulo}</td>
+                        <td className="py-2">{module.nombre}</td>
+                        <td className="py-2">{module.dimensiones}</td>
+                        <td className="py-2">
+                            <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => { onEdit(module); }}>
+                                Editar
+                            </button>
+                            <button className="bg-red-500 text-white px-2 py-1 rounded ml-2" onClick={() => { onDelete(module.id_modulo); }}>
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    );
 };
 
 export default ModuleTable;

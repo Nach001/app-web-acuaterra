@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import type { FunctionComponent } from "react";
 import ButtonComponent from "../components/ui/button/button";
 import InputCustomComponent from "../components/ui/input/input";
@@ -10,19 +9,12 @@ const API_BASE_URL: string = import.meta.env["VITE_API_BASE_URL"] as string;
 
 export const Auth: FunctionComponent = () => {
 	const navigate = useNavigate();
-	const { t, i18n } = useTranslation();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
-	const onTranslateButtonClick = async (): Promise<void> => {
-		if (i18n.resolvedLanguage === "en") {
-			await i18n.changeLanguage("es");
-		} else {
-			await i18n.changeLanguage("en");
-		}
-	};
+
 
 	const handleLogin = async (): Promise<void> => {
 		setLoading(true);
@@ -52,10 +44,7 @@ export const Auth: FunctionComponent = () => {
 
 	return (
 		<div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center transition-opacity duration-100 ease-in-out">
-			<p className="text-white text-6xl">{t("home.greeting")}</p>
-			<ButtonComponent type="button" onClick={onTranslateButtonClick}>
-				translate text button
-			</ButtonComponent>
+			
 			<InputCustomComponent
 				error={error}
 				name="email"

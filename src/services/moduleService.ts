@@ -31,11 +31,11 @@ export const updateModule = async (
 	id: number,
 	moduleData: UpdateModuleRequest
 ): Promise<ModuleResponse> => {
-	const response = await fetch(`${API_BASE_URL}/modulos/${id}`, {
+	const response = await fetch(`${API_BASE_URL}/modulos/editarModuloMVC/${id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: `Bearer ${localStorage.getItem("token")}`,
+			Authorization: `${localStorage.getItem("token")}`,
 		},
 		body: JSON.stringify(moduleData),
 	});
@@ -52,7 +52,7 @@ export const createModule = async (
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: `Bearer ${localStorage.getItem("token")}`,
+			Authorization: `${localStorage.getItem("token")}`,
 		},
 		body: JSON.stringify(moduleData),
 	});
@@ -61,3 +61,18 @@ export const createModule = async (
 	}
 	return response.json() as Promise<ModuleResponse>;
 };
+
+export const deleteModule = async (moduleId: number): Promise<ModuleResponse> => {
+	const response = await fetch(`${API_BASE_URL}/modulos/eliminarModuloMVC/${moduleId}`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `${localStorage.getItem("token")}`,
+		},
+	});
+	if (!response.ok) {
+		throw new Error("Network response was not ok");
+	}
+	return response.json() as Promise<ModuleResponse>;
+};
+
