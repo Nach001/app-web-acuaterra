@@ -11,9 +11,33 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UsersImport } from './routes/users'
+import { Route as ModuleImport } from './routes/module'
+import { Route as AuthImport } from './routes/auth'
+import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const UsersRoute = UsersImport.update({
+  path: '/users',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ModuleRoute = ModuleImport.update({
+  path: '/module',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthRoute = AuthImport.update({
+  path: '/auth',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutRoute = AboutImport.update({
+  path: '/about',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -31,12 +55,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
+    }
+    '/module': {
+      id: '/module'
+      path: '/module'
+      fullPath: '/module'
+      preLoaderRoute: typeof ModuleImport
+      parentRoute: typeof rootRoute
+    }
+    '/users': {
+      id: '/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  AboutRoute,
+  AuthRoute,
+  ModuleRoute,
+  UsersRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -46,11 +104,27 @@ export const routeTree = rootRoute.addChildren({ IndexRoute })
     "__root__": {
       "filePath": "__root.ts",
       "children": [
-        "/"
+        "/",
+        "/about",
+        "/auth",
+        "/module",
+        "/users"
       ]
     },
     "/": {
       "filePath": "index.ts"
+    },
+    "/about": {
+      "filePath": "about.ts"
+    },
+    "/auth": {
+      "filePath": "auth.ts"
+    },
+    "/module": {
+      "filePath": "module.ts"
+    },
+    "/users": {
+      "filePath": "users.ts"
     }
   }
 }
