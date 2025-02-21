@@ -13,7 +13,8 @@ import type {
 } from "../common/types";
 
 export const Module = (): FunctionComponent => {
-    const { modules, loading, error } = useModules();
+	const [reload, setReload] = useState(false);
+    const { modules, loading, error } = useModules(reload);
     const [isEditModalOpen, setEditModalOpen] = useState(false);
     const [isCreateModalOpen, setCreateModalOpen] = useState(false);
     const [selectedModule, setSelectedModule] = useState<ModuleType>({} as ModuleType);
@@ -22,18 +23,19 @@ export const Module = (): FunctionComponent => {
     const handleEdit = (module: ModuleType): void => {
         setSelectedModule(module);
         setEditModalOpen(true);
+		setReload(!reload); //
     };
 
     const handleDelete = async (moduleId: number): Promise<void> => {
         await deleteModule(moduleId);
-        // Refrescar la lista de módulos
+		setReload(!reload); //
     };
 
     const handleSave = async (moduleData: UpdateModuleRequest): Promise<void> => {
         if (selectedModule) {
             await updateModule(selectedModule.id_modulo, moduleData);
             setEditModalOpen(false);
-            // Refrescar la lista de módulos
+			setReload(!reload); //
         }
     };
 
@@ -42,7 +44,7 @@ export const Module = (): FunctionComponent => {
     ): Promise<void> => {
         await createModule(moduleData);
         setCreateModalOpen(false);
-        // Refrescar la lista de módulos
+		setReload(!reload); //
     };
 
     const handleSearchChange = (term: string): void => {

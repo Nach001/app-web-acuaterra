@@ -15,7 +15,7 @@ interface Module {
 	nombre_persona_asignada: string | null;
 }
 
-const useModules = (): {
+const useModules = (reload: boolean): {
 	modules: Array<Module>;
 	loading: boolean;
 	error: string;
@@ -41,7 +41,7 @@ const useModules = (): {
 		fetchModulesData().catch((error) => {
 			console.error("Error fetching modules:", error);
 		});
-	}, []);
+	}, [reload]);
 
 	return { modules, loading, error };
 };
