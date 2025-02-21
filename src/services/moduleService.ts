@@ -48,7 +48,7 @@ export const updateModule = async (
 export const createModule = async (
 	moduleData: CreateModuleRequest
 ): Promise<ModuleResponse> => {
-	const response = await fetch(`${API_BASE_URL}/crearModulo`, {
+	const response = await fetch(`${API_BASE_URL}/modulos/registerModMVC`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
