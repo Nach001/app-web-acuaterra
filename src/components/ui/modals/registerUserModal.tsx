@@ -21,7 +21,8 @@ const RegisterUserModal: React.FC<RegisterUserModalProps> = ({
 		// eslint-disable-next-line camelcase
 		n_documento_identidad: "",
 		sede: "",
-		rol: 3,
+		// eslint-disable-next-line camelcase
+		id_rol: 3,
 		// eslint-disable-next-line camelcase
 		n_ficha: "",
 		jornada: "",
@@ -30,7 +31,8 @@ const RegisterUserModal: React.FC<RegisterUserModalProps> = ({
 	});
 
 	const handleRegister = (): void => {
-		onRegister(newUser);
+		// eslint-disable-next-line camelcase
+		onRegister({ ...newUser, id_rol: newUser.id_rol });
 		setShowModal(false);
 	};
 
