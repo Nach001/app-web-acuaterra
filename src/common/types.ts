@@ -61,7 +61,7 @@ export interface UserRequest {
 	n_documento_identidad: string;
 	sede: string;
 	id_rol: number,
-	rol: number
+	rol?: number
 	n_ficha: string;
 	jornada: string;
 	nombre_del_programa: string;
