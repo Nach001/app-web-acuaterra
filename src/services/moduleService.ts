@@ -17,10 +17,9 @@ export const fetchModules = async (): Promise<Array<Module>> => {
 	if (!response.ok) {
 		throw new Error("Network response was not ok");
 	}
-	const data: Array<Array<Module>> = (await response.json()) as Array<
+	const data: Array<Module> = (await response.json()) as 
 		Array<Module>
-	>;
-	return data[0] as Array<Module>;
+	return data;
 };
 
 interface ModuleResponse {
