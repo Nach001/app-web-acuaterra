@@ -4,3 +4,4 @@ import { Module } from "../pages/Module";
 export const Route = createFileRoute("/module")({
 	component: Module,
 });
+
