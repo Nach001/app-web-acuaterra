@@ -19,9 +19,7 @@ export const fetchUsers = async (): Promise<Array<User>> => {
     if (!response.ok) {
         throw new Error("Network response was not ok");
     }
-    const data:Array<User> = (await response.json()) as Array<User>
-    
-    return data;
+    return await response.json() as Array<User>;
 };
 
 interface ModuleResponse {
