@@ -1,7 +1,3 @@
-Aquí tienes el README corregido y mejor estructurado:  
-
----
-
 # 📌 Acuaterra Frontend  
 
 Este proyecto es una aplicación frontend desarrollada con **React**, **Vite** y **Tailwind CSS**.  
