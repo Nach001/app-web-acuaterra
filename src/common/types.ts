@@ -66,4 +66,21 @@ export interface UserRequest {
 	jornada: string;
 	nombre_del_programa: string;
 }
+export interface Bitacora {
+    id_bitacora: number;
+    id_modulo: number;
+    fecha: string;
+    descripcion: string;
+}
 
+export interface CreateBitacoraRequest {
+    id_modulo: number;
+    fecha: string;
+    descripcion: string;
+}
+
+export interface UpdateBitacoraRequest {
+    id_modulo: number;
+    fecha: string;
+    descripcion: string;
+}
