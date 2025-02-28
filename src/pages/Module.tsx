@@ -11,6 +11,7 @@ import type {
     CreateModuleRequest,
     FunctionComponent,
 } from "../common/types";
+import Layout from "../components/layout/layout";
 
 export const Module = (): FunctionComponent => {
 	const [reload, setReload] = useState(false);
@@ -56,7 +57,8 @@ export const Module = (): FunctionComponent => {
     );
 
     return (
-        <div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
+        <Layout>
+ <div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
             <h1 className="text-2xl font-bold mt-4">Lista de Módulos</h1>
             <SearchModuleInput onSearchChange={handleSearchChange} />
             <button
@@ -90,5 +92,7 @@ export const Module = (): FunctionComponent => {
                 }}
             />
         </div>
+        </Layout>
+       
     );
 };
