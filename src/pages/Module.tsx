@@ -21,13 +21,15 @@ import type {
 } from "../common/types";
 import Layout from "../components/layout/layout";
 
-// Importación de imágenes del proyecto
+// Importación de íconos del proyecto
 import closeSessionIcon from "../assets/images/cerrar-sesion.png";
 import userIcon from "../assets/images/userlogo.png";
 import moduleIcon from "../assets/images/module.png";
 import homeIcon from "../assets/images/home.png";
 import acuaterraLogo from "../assets/images/logo.png";
 import reportIcon from "../assets/images/reporte.png";
+import binnacleIcon from "../assets/images/bitacora.png";
+
 
 /**
  * Página de módulos, estilos actualizados (sidebar, layout, colores).
@@ -118,6 +120,13 @@ export const Module: FunctionComponent = () => {
                 <img alt="Reporte" className="h-6 w-6 mr-2" src={reportIcon} />
                 <span className="font-bold">Reporte</span>
               </li>
+              <li
+              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
+              onClick={() => navigate({ to: "/bitacoras" })}
+                >
+              <img alt="Reporte" className="h-6 w-6 mr-2" src={binnacleIcon} />
+              <span className="font-bold">Bitacoras</span>
+             </li> 
             </ul>
             {/* Grupo 2: "Cerrar Sesión" en bloque separado */}
             <div className="mt-60">

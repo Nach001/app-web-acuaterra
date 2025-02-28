@@ -99,7 +99,7 @@ export const Bitacoras: FunctionComponent = () => {
                                 className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
                             >
                                 <img alt="Bitácora" className="h-6 w-6 mr-2" src={binnacleIcon} />
-                                <span className="font-bold">Bitácora</span>
+                                <span className="font-bold">Bitácoras</span>
                             </li>
                         </ul>
                         {/* Grupo 2: "Cerrar Sesión" en un bloque separado */}

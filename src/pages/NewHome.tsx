@@ -21,6 +21,8 @@ import userIcon from "../assets/images/userlogo.png";
 import moduleIcon from "../assets/images/module.png";
 import closeSessionIcon from "../assets/images/cerrar-sesion.png";
 import acuaterraLogo from "../assets/images/logo.png";
+import reportIcon from "../assets/images/reporte.png";
+import binnacleIcon from "../assets/images/bitacora.png";
 
 // Se elimina la importación del logoSena
 
@@ -28,7 +30,9 @@ import acuaterraLogo from "../assets/images/logo.png";
 import foto1 from "../assets/images/fotoAcuapico_1.jpg";
 import foto2 from "../assets/images/fotoAcuapico_2.jpg";
 import foto3 from "../assets/images/fotoAcuapico_3.jpg";
-import reportIcon from "../assets/images/reporte.png";
+
+
+
 
 const Home: FC = () => {
   const navigate = useNavigate();
@@ -74,6 +78,13 @@ const Home: FC = () => {
               <img alt="Módulos" className="h-6 w-6 mr-2" src={reportIcon} />
               <span className="font-bold">Reporte</span>
             </li>
+            <li
+              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
+              onClick={() => navigate({ to: "/bitacoras" })}
+                >
+              <img alt="Reporte" className="h-6 w-6 mr-2" src={binnacleIcon} />
+              <span className="font-bold">Bitacoras</span>
+             </li>
           </ul>
 
           {/* Grupo 2: "Cerrar Sesión" en un bloque separado */}

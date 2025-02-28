@@ -18,10 +18,10 @@ import { Route as NewHomeImport } from './routes/newHome'
 import { Route as ModuleRegisterImport } from './routes/moduleRegister'
 import { Route as ModuleImport } from './routes/module'
 import { Route as HomeImport } from './routes/home'
+import { Route as BitacorasImport } from './routes/bitacoras'
 import { Route as AuthImport } from './routes/auth'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
-import { Route as BitacorasImport } from './routes/bitacoras'
 
 // Create/Update Routes
 
@@ -55,13 +55,13 @@ const ModuleRoute = ModuleImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const BitacorasRoute = BitacorasImport.update({
-  path: '/bitacoras',
+const HomeRoute = HomeImport.update({
+  path: '/home',
   getParentRoute: () => rootRoute,
 } as any)
 
-const HomeRoute = HomeImport.update({
-  path: '/home',
+const BitacorasRoute = BitacorasImport.update({
+  path: '/bitacoras',
   getParentRoute: () => rootRoute,
 } as any)
 
