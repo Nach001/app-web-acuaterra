@@ -3,9 +3,8 @@
  * Visual: Formulario basado en el Figma.
  */
 
-
 // src/pages/Module.tsx
-import type { FunctionComponent} from "react";
+import type { FunctionComponent } from "react";
 // eslint-disable-next-line no-duplicate-imports
 import { useState } from "react";
 import useModules from "../hooks/useModules";
@@ -22,8 +21,7 @@ import type {
 } from "../common/types";
 import Layout from "../components/layout/layout";
 
-//Importacion de imagenes del proyecto
-
+// Importación de imágenes del proyecto
 import closeSessionIcon from "../assets/images/cerrar-sesion.png";
 import userIcon from "../assets/images/userlogo.png";
 import moduleIcon from "../assets/images/module.png";
@@ -31,9 +29,8 @@ import homeIcon from "../assets/images/home.png";
 import acuaterraLogo from "../assets/images/logo.png";
 import reportIcon from "../assets/images/reporte.png";
 
-
 /**
- * Página de módulos, se cambia la parte visual (sidebar, layout, colores).
+ * Página de módulos, estilos actualizados (sidebar, layout, colores).
  * La lógica de CRUD se mantiene intacta.
  */
 export const Module: FunctionComponent = () => {
@@ -64,49 +61,8 @@ export const Module: FunctionComponent = () => {
     }
   };
 
-    return (
-        <Layout>
- <div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
-            <h1 className="text-2xl font-bold mt-4">Lista de Módulos</h1>
-            <SearchModuleInput onSearchChange={handleSearchChange} />
-            <button
-                className="mt-4 bg-green-500 text-white p-2 rounded"
-                onClick={() => {
-                    setCreateModalOpen(true);
-                }}
-            >
-                Registrar Nuevo Módulo
-            </button>
-            {loading && <p>Cargando...</p>}
-            {error && <p>Error: {error}</p>}
-            <div className="overflow-y-auto max-h-96 w-full mt-4">
-                <ModuleTable
-                    modules={filteredModules}
-                    onDelete={handleDelete}
-                    onEdit={handleEdit}
-                />
-            </div>
-            <EditModuleModal
-                isOpen={isEditModalOpen}
-                module={selectedModule}
-                setIsOpen={setEditModalOpen}
-                onSave={handleSave}
-            />
-            <CreateModuleModal
-                isOpen={isCreateModalOpen}
-                onCreate={handleCreate}
-                onClose={() => {
-                    setCreateModalOpen(false);
-                }}
-            />
-        </div>
-        </Layout>
-       
-    );
-};
   const handleCreate = async (moduleData: CreateModuleRequest): Promise<void> => {
-    await 
-    createModule(moduleData);
+    await createModule(moduleData);
     setCreateModalOpen(false);
     setReload(!reload);
   };
@@ -119,97 +75,100 @@ export const Module: FunctionComponent = () => {
     module.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+
+  // integracion de la vista de la pagina de modulos
+  
   return (
-    <div className="flex min-h-screen bg-white font-sans">
-      {/* Sidebar con fondo gris (bg-gray-300) */}
-      <aside className="w-64 bg-gray-300 border-r border-gray-400 flex flex-col">
-        <div className="p-4 flex flex-col items-center">
-          <img alt="Acuaterra Logo" className="h-16 mb-2" src={acuaterraLogo} />
-          <p className="text-gray-800 font-semibold">Bienvenido, usuario!</p>
-        </div>
-        <nav className="flex-1">
-          {/* Grupo 1: "Inicio", "Usuarios" y "Módulos" */}
-          <ul className="space-y-20 mt-20">
-            <li
-              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-400 hover:scale-105"
-              onClick={() => navigate({ to: "/newHome" })}
-            >
-              <img alt="Inicio" className="h-6 w-6 mr-2" src={homeIcon} />
-              <span className="font-bold">Inicio</span>
-            </li>
-            <li
-              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-400 hover:scale-105"
-              onClick={() => navigate({ to: "/users" })}
-            >
-              <img alt="Usuarios" className="h-6 w-6 mr-2" src={userIcon} />
-              <span className="font-bold">Usuarios</span>
-            </li>
-            <li
-              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-400 hover:scale-105"
-              onClick={() => navigate({ to: "/module" })}
-            >
-              <img alt="Módulos" className="h-6 w-6 mr-2" src={moduleIcon} />
-              <span className="font-bold">Módulos</span>
-            </li>
-            <li 
-              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
-              onClick={() => navigate({ to: "/report" })}
-              >
-              
-              <img alt="Módulos" className="h-6 w-6 mr-2" src={reportIcon} />
-              <span className="font-bold">Reporte</span>
-            </li>
-          </ul>
-          {/* Grupo 2: "Cerrar Sesión" en bloque separado */}
-          <div className="mt-60">
-            <ul className="space-y-4">
+    <Layout>
+      <div className="flex min-h-screen bg-white font-sans">
+        {/* Sidebar con fondo gris (bg-gray-300) */}
+        <aside className="w-64 bg-gray-300 border-r border-gray-400 flex flex-col">
+          <div className="p-4 flex flex-col items-center">
+            <img alt="Acuaterra Logo" className="h-16 mb-2" src={acuaterraLogo} />
+            <p className="text-gray-800 font-semibold">Bienvenido, usuario!</p>
+          </div>
+          <nav className="flex-1">
+            {/* Grupo 1: "Inicio", "Usuarios" y "Módulos" */}
+            <ul className="space-y-20 mt-20">
               <li
                 className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-400 hover:scale-105"
-                onClick={() => navigate({ to: "/auth" })}
+                onClick={() => navigate({ to: "/newHome" })}
               >
-                <img alt="Cerrar Sesión" className="h-6 w-6 mr-2" src={closeSessionIcon} />
-                <span className="font-bold">Cerrar Sesión</span>
+                <img alt="Inicio" className="h-6 w-6 mr-2" src={homeIcon} />
+                <span className="font-bold">Inicio</span>
+              </li>
+              <li
+                className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-400 hover:scale-105"
+                onClick={() => navigate({ to: "/users" })}
+              >
+                <img alt="Usuarios" className="h-6 w-6 mr-2" src={userIcon} />
+                <span className="font-bold">Usuarios</span>
+              </li>
+              <li
+                className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-400 hover:scale-105"
+                onClick={() => navigate({ to: "/module" })}
+              >
+                <img alt="Módulos" className="h-6 w-6 mr-2" src={moduleIcon} />
+                <span className="font-bold">Módulos</span>
+              </li>
+              <li
+                className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
+                onClick={() => navigate({ to: "/report" })}
+              >
+                <img alt="Reporte" className="h-6 w-6 mr-2" src={reportIcon} />
+                <span className="font-bold">Reporte</span>
               </li>
             </ul>
-           
+            {/* Grupo 2: "Cerrar Sesión" en bloque separado */}
+            <div className="mt-60">
+              <ul className="space-y-4">
+                <li
+                  className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-400 hover:scale-105"
+                  onClick={() => navigate({ to: "/auth" })}
+                >
+                  <img alt="Cerrar Sesión" className="h-6 w-6 mr-2" src={closeSessionIcon} />
+                  <span className="font-bold">Cerrar Sesión</span>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          {/* Footer: Texto del footer subido un poco */}
+          <div className="p-0">
+            <p className="text-center text-xs mt-2">
+              versión 1.0 <br /> Advanced Aquaponics Monitoring System
+            </p>
           </div>
-        </nav>
-        {/* Footer: Texto del footer subido un poco */}
-        <div className="p-0">
-          <p className="text-center text-xs mt-2">
-            versión 1.0 <br /> Advanced Aquaponics Monitoring System
-          </p>
-        </div>
-      </aside>
+        </aside>
 
-      {/* Contenido principal */}
-      <main className="flex-1 p-6">
-        <h1 className="text-2xl font-bold mb-4">Lista de Módulos</h1>
-        <SearchModuleInput onSearchChange={handleSearchChange} />
-        <br />
-        <button
-          className="mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition"
-          onClick={() => { setCreateModalOpen(true); }}
-        >
-          Registrar Nuevo Módulo
-        </button>
-        {loading && <p className="mt-4 text-gray-600">Cargando...</p>}
-        {error && <p className="mt-4 text-red-500">Error: {error}</p>}
-        <div className="mt-4 overflow-x-auto">
-          <ModuleTable modules={filteredModules} onDelete={handleDelete} onEdit={handleEdit} />
-        </div>
-        <EditModuleModal
-          isOpen={isEditModalOpen}
-          module={selectedModule}
-          setIsOpen={setEditModalOpen}
-          onSave={handleSave}
-        />
-        <CreateModuleModal
-          isOpen={isCreateModalOpen}
-          onClose={() => { setCreateModalOpen(false); }}
-          onCreate={handleCreate}
-        />
-      </main>
-    </div>
+        {/* Contenido principal */}
+        <main className="flex-1 p-6">
+          <h1 className="text-2xl font-bold mb-4">Lista de Módulos</h1>
+          <SearchModuleInput onSearchChange={handleSearchChange} />
+          <br />
+          <button
+            className="mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition"
+            onClick={() => { setCreateModalOpen(true); }}
+          >
+            Registrar Nuevo Módulo
+          </button>
+          {loading && <p className="mt-4 text-gray-600">Cargando...</p>}
+          {error && <p className="mt-4 text-red-500">Error: {error}</p>}
+          <div className="mt-4 overflow-x-auto">
+            <ModuleTable modules={filteredModules} onDelete={handleDelete} onEdit={handleEdit} />
+          </div>
+          <EditModuleModal
+            isOpen={isEditModalOpen}
+            module={selectedModule}
+            setIsOpen={setEditModalOpen}
+            onSave={handleSave}
+          />
+          <CreateModuleModal
+            isOpen={isCreateModalOpen}
+            onClose={() => { setCreateModalOpen(false); }}
+            onCreate={handleCreate}
+          />
+        </main>
+      </div>
+    </Layout>
   );
 };
