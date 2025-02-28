@@ -87,6 +87,8 @@ export const Users: FunctionComponent = () => {
             <p className="text-gray-700 font-semibold">Bienvenido, usuario!</p>
           </div>
           <nav className="flex-1">
+
+            
             {/* Grupo 1: "Inicio", "Usuarios" y "Módulos" */}
             <ul className="space-y-20 mt-20">
               <li
