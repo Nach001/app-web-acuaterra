@@ -64,7 +64,8 @@ export const Module: FunctionComponent = () => {
   };
 
   const handleCreate = async (moduleData: CreateModuleRequest): Promise<void> => {
-    await createModule(moduleData);
+    await 
+    createModule(moduleData);
     setCreateModalOpen(false);
     setReload(!reload);
   };
