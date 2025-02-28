@@ -61,23 +61,23 @@ export const Module: FunctionComponent = () => {
     }
   };
 
-  const handleCreate = async (moduleData: CreateModuleRequest): Promise<void> => {
+  const handleCreate = async (moduleData: CreateModuleRequest): Promise<void> => {          // Merged Const
     await createModule(moduleData);
     setCreateModalOpen(false);
     setReload(!reload);
   };
 
-  const handleSearchChange = (term: string): void => {
+  const handleSearchChange = (term: string): void => {                                      // Merged Const
     setSearchTerm(term);
   };
 
-  const filteredModules = modules.filter((module) =>
+  const filteredModules = modules.filter((module) =>                                        // Merged Const
     module.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
 
   // integracion de la vista de la pagina de modulos
-  
+
   return (
     <Layout>
       <div className="flex min-h-screen bg-white font-sans">
@@ -172,3 +172,5 @@ export const Module: FunctionComponent = () => {
     </Layout>
   );
 };
+
+export default Module;

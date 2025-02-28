@@ -17,14 +17,11 @@ import { Route as ReportImport } from './routes/report'
 import { Route as NewHomeImport } from './routes/newHome'
 import { Route as ModuleRegisterImport } from './routes/moduleRegister'
 import { Route as ModuleImport } from './routes/module'
-<<<<<<< HEAD
-import { Route as BitacorasImport } from './routes/bitacoras'
-=======
 import { Route as HomeImport } from './routes/home'
->>>>>>> estilosTailwind
 import { Route as AuthImport } from './routes/auth'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as BitacorasImport } from './routes/bitacoras'
 
 // Create/Update Routes
 
@@ -60,6 +57,9 @@ const ModuleRoute = ModuleImport.update({
 
 const BitacorasRoute = BitacorasImport.update({
   path: '/bitacoras',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const HomeRoute = HomeImport.update({
   path: '/home',
   getParentRoute: () => rootRoute,
@@ -105,19 +105,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
-<<<<<<< HEAD
     '/bitacoras': {
       id: '/bitacoras'
       path: '/bitacoras'
       fullPath: '/bitacoras'
       preLoaderRoute: typeof BitacorasImport
-=======
+      parentRoute: typeof rootRoute
+    }
     '/home': {
       id: '/home'
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof HomeImport
->>>>>>> estilosTailwind
       parentRoute: typeof rootRoute
     }
     '/module': {
@@ -171,11 +170,8 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AboutRoute,
   AuthRoute,
-<<<<<<< HEAD
   BitacorasRoute,
-=======
   HomeRoute,
->>>>>>> estilosTailwind
   ModuleRoute,
   ModuleRegisterRoute,
   NewHomeRoute,
@@ -195,11 +191,8 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/about",
         "/auth",
-<<<<<<< HEAD
         "/bitacoras",
-=======
         "/home",
->>>>>>> estilosTailwind
         "/module",
         "/moduleRegister",
         "/newHome",
@@ -217,13 +210,11 @@ export const routeTree = rootRoute.addChildren({
     "/auth": {
       "filePath": "auth.ts"
     },
-<<<<<<< HEAD
     "/bitacoras": {
       "filePath": "bitacoras.ts"
-=======
+    },
     "/home": {
       "filePath": "home.ts"
->>>>>>> estilosTailwind
     },
     "/module": {
       "filePath": "module.ts"

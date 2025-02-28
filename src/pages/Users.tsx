@@ -1,6 +1,6 @@
 /**
- * Página de Usuarios - Acuaterra (MUsers).
- * Visual: Basado en el diseño de Figma, 
+ * Página de Usuarios - Acuaterra (Users).
+ * Visual: Basado en el diseño de Figma,
  * La lógica de CRUD se mantiene intacta.
  */
 
@@ -14,38 +14,7 @@ import RegisterUserModal from "../components/ui/modals/registerUserModal";
 import UpdateUserModal from "../components/ui/modals/updateUserModalProps";
 import useRegisterUser from "../hooks/useRegisterUser";
 import { deleteUser, updateUser } from "../services/userService";
-<<<<<<< HEAD
 import Layout from "../components/layout/layout";
-
-export const Users = (): FunctionComponent => {
-	const [page, setPage] = useState(1);
-	const [showModal, setShowModal] = useState(false);
-	const [showUpdateModal, setShowUpdateModal] = useState(false);
-	const [selectedUser, setSelectedUser] = useState<User | null>(null);
-	const [reload, setReload] = useState(false);
-	const pageSize = 10;
-	const { users, loading, error } = useUsers(page, pageSize, reload);
-	const { registerUser } = useRegisterUser();
-
-	const handleRegisterUser = async (userData: UserRequest): Promise<void> => {
-		await registerUser(userData);
-		setReload(!reload);
-		setShowModal(false);
-	};
-
-	const handleDeleteUser = async (userId: number): Promise<void> => {
-		await deleteUser(userId);
-		setReload(!reload);
-	};
-
-	const handleUpdateUser = async (
-		userId: number,
-		userData: UserRequest
-	): Promise<void> => {
-		await updateUser(userId, userData);
-		setReload(!reload);
-	};
-=======
 import { useNavigate } from "@tanstack/react-router";
 
 // Íconos e imágenes
@@ -73,7 +42,6 @@ export const Users: FunctionComponent = () => {
 
   // Para mostrar un toast cuando se registre un usuario exitosamente
   const [showToast, setShowToast] = useState(false);
->>>>>>> estilosTailwind
 
   const handleRegisterUser = async (userData: UserRequest): Promise<void> => {
     try {
@@ -86,69 +54,12 @@ export const Users: FunctionComponent = () => {
     }
   };
 
-	return (
-		<Layout>
-			<div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
-				<div className="flex flex-col items-center mt-4">
-					<button
-						className="mb-4 p-2 bg-green-500 text-white"
-						onClick={() => {
-							setShowModal(true);
-						}}
-					>
-						Register User
-					</button>
-				</div>
-				{loading && <p>Loading...</p>}
-				{error && <p>Error: {String(error)}</p>}
-				{!loading && !error && (
-					<div className="overflow-y-auto max-h-96 w-full">
-						<UserTable
-							users={users}
-							onDeleteUser={handleDeleteUser}
-							onUpdateUser={handleOpenUpdateModal}
-						/>
-					</div>
-				)}
-				<div className="flex justify-between mt-4">
-					<button
-						disabled={page === 1}
-						onClick={() => {
-							setPage(page - 1);
-						}}
-					>
-						Previous
-					</button>
-					<button
-						onClick={() => {
-							setPage(page + 1);
-						}}
-					>
-						Next
-					</button>
-				</div>
-				<RegisterUserModal
-					setShowModal={setShowModal}
-					showModal={showModal}
-					onRegister={handleRegisterUser}
-				/>
-				{selectedUser && (
-					<UpdateUserModal
-						setShowModal={setShowUpdateModal}
-						showModal={showUpdateModal}
-						user={selectedUser}
-						onUpdate={handleUpdateUser}
-					/>
-				)}
-			</div>
-		</Layout>
-	);
   const handleDeleteUser = async (userId: number): Promise<void> => {
     await deleteUser(userId);
     setReload(!reload);
   };
 
-  const handleUpdateUser = async (
+  const handleUpdateUser = async (                                          // Merged Const
     userId: number,
     userData: UserRequest
   ): Promise<void> => {
@@ -156,165 +67,168 @@ export const Users: FunctionComponent = () => {
     setReload(!reload);
   };
 
-  const handleOpenUpdateModal = (user: User): void => {
+  const handleOpenUpdateModal = (user: User): void => {                     // Merged Const
     setSelectedUser(user);
     setShowUpdateModal(true);
   };
 
 
 
+  // Integración de la página de usuarios
   
-  
-
   return (
-    <div className="flex min-h-screen bg-white">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gray-300 border-r border-gray-300 flex flex-col">
-        <div className="p-4 flex flex-col items-center">
-          <img alt="Acuaterra Logo" className="h-16 mb-2" src={acuaterraLogo} />
-          <p className="text-gray-700 font-semibold">Bienvenido, usuario!</p>
-        </div>
-        <nav className="flex-1">
-          {/* Grupo 1: "Inicio", "Usuarios" y "Módulos" */}
-          <ul className="space-y-20 mt-20">
-            <li 
-              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
-              onClick={() => navigate({ to: "/newHome" })}
-            >
-              <img alt="Inicio" className="h-6 w-6 mr-2" src={homeIcon} />
-              <span className="font-bold">Inicio</span>
-            </li>
-            <li 
-              className="flex items-center p-2 bg-gray-300 transition"
-            >
-              <img alt="Usuarios" className="h-6 w-6 mr-2" src={userIcon} />
-              <span className="font-bold">Usuarios</span>
-            </li>
-            <li 
-              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
-              onClick={() => navigate({ to: "/module" })}
-            >
-              <img alt="Módulos" className="h-6 w-6 mr-2" src={moduleIcon} />
-              <span className="font-bold">Módulos</span>
-            </li>
-            <li 
-              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
-              onClick={() => navigate({ to: "/report" })}
-              >
-              
-              <img alt="Módulos" className="h-6 w-6 mr-2" src={reportIcon} />
-              <span className="font-bold">Reporte</span>
-            </li>
-          </ul>
-          {/* Grupo 2: "Cerrar Sesión" en un bloque separado */}
-          <div className="mt-60">
-            <ul className="space-y-4">
-              <li 
+    <Layout>
+      <div className="flex min-h-screen bg-white">
+        {/* Sidebar con fondo gris (bg-gray-300) */}
+        <aside className="w-64 bg-gray-300 border-r border-gray-300 flex flex-col">
+          <div className="p-4 flex flex-col items-center">
+            <img alt="Acuaterra Logo" className="h-16 mb-2" src={acuaterraLogo} />
+            <p className="text-gray-700 font-semibold">Bienvenido, usuario!</p>
+          </div>
+          <nav className="flex-1">
+            {/* Grupo 1: "Inicio", "Usuarios" y "Módulos" */}
+            <ul className="space-y-20 mt-20">
+              <li
                 className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
-                onClick={() => navigate({ to: "/auth" })}
+                onClick={() => navigate({ to: "/newHome" })}
               >
-                <img alt="Cerrar Sesión" className="h-6 w-6 mr-2" src={closeSessionIcon} />
-                <span className="font-bold">Cerrar Sesión</span>
+                <img alt="Inicio" className="h-6 w-6 mr-2" src={homeIcon} />
+                <span className="font-bold">Inicio</span>
+              </li>
+              <li className="flex items-center p-2 bg-gray-300 transition">
+                <img alt="Usuarios" className="h-6 w-6 mr-2" src={userIcon} />
+                <span className="font-bold">Usuarios</span>
+              </li>
+              <li
+                className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
+                onClick={() => navigate({ to: "/module" })}
+              >
+                <img alt="Módulos" className="h-6 w-6 mr-2" src={moduleIcon} />
+                <span className="font-bold">Módulos</span>
+              </li>
+              <li
+                className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
+                onClick={() => navigate({ to: "/report" })}
+              >
+                <img alt="Reporte" className="h-6 w-6 mr-2" src={reportIcon} />
+                <span className="font-bold">Reporte</span>
               </li>
             </ul>
+            {/* Grupo 2: "Cerrar Sesión" en un bloque separado */}
+            <div className="mt-60">
+              <ul className="space-y-4">
+                <li
+                  className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
+                  onClick={() => navigate({ to: "/auth" })}
+                >
+                  <img alt="Cerrar Sesión" className="h-6 w-6 mr-2" src={closeSessionIcon} />
+                  <span className="font-bold">Cerrar Sesión</span>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          {/* Footer: Texto del footer subido un poco */}
+          <div className="p-0">
+            <p className="text-center text-xs mt-2">
+              versión 1.0 <br />
+              Advanced Aquaponics Monitoring System
+            </p>
           </div>
-        </nav>
-        {/* Footer: Texto del footer subido un poco */}
-        <div className="p-0">
-          <p className="text-center text-xs mt-2">
-            versión 1.0 <br />
-            Advanced Aquaponics Monitoring System
-          </p>
-        </div>
-      </aside>
+        </aside>
 
-      {/* Contenido principal */}
-      
-      <p className="text-gray-700 font-semibold">Lista de Usuarios</p>
-      <main className="flex-1 p-6">
-        
-        {loading && (
-          <div className="mt-4">
-            <Spinner />
-          </div>
-        )}
-        {error && (
-          <div className="mt-4 text-red-500 flex items-center">
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M10.29 3.86l-6.6 11.45a1 1 0 00.86 1.5h13.3a1 1 0 00.86-1.5l-6.6-11.45a1 1 0 00-1.72 0zM12 9v4m0 4h.01"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
+        {/* Contenido principal */}
+        <main className="flex-1 p-6">
+          <p className="text-gray-700 font-semibold">Lista de Usuarios</p>
+          {loading && (
+            <div className="mt-4">
+              <Spinner />
+            </div>
+          )}
+          {error && (
+            <div className="mt-4 text-red-500 flex items-center">
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M10.29 3.86l-6.6 11.45a1 1 0 00.86 1.5h13.3a1 1 0 00.86-1.5l-6.6-11.45a1 1 0 00-1.72 0zM12 9v4m0 4h.01"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                />
+              </svg>
+              <p>Error: {String(error)}</p>
+            </div>
+          )}
+          {!loading && !error && (
+            <div className="overflow-x-auto">
+              <UserTable
+                users={users}
+                onDeleteUser={handleDeleteUser}
+                onUpdateUser={handleOpenUpdateModal}
               />
-            </svg>
-            <p>Error: {String(error)}</p>
+            </div>
+          )}
+          <div className="flex justify-between mt-4">
+            <button
+              disabled={page === 1}
+              className="
+                bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
+                rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
+              "
+              onClick={() => {
+                setPage(page - 1);
+              }}
+            >
+              Previous
+            </button>
+            <div className="flex flex-col items-center mt-4">
+              <button
+                className="
+                  mb-4 p-2 bg-green-600 hover:bg-green-700 text-white font-semibold 
+                  rounded transition focus:outline-none focus:ring-2 focus:ring-green-300
+                "
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              >
+                Register User
+              </button>
+            </div>
+            <button
+              className="
+                bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
+                rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
+              "
+              onClick={() => {
+                setPage(page + 1);
+              }}
+            >
+              Next
+            </button>
           </div>
-        )}
-        {!loading && !error && (
-          <div className="overflow-x-auto">
-            <UserTable
-              users={users}
-              onDeleteUser={handleDeleteUser}
-              onUpdateUser={handleOpenUpdateModal}
+          <RegisterUserModal
+            setShowModal={setShowModal}
+            showModal={showModal}
+            onRegister={handleRegisterUser}
+          />
+          {selectedUser && (
+            <UpdateUserModal
+              setShowModal={setShowUpdateModal}
+              showModal={showUpdateModal}
+              user={selectedUser}
+              onUpdate={handleUpdateUser}
             />
-          </div>
-        )}
-        <div className="flex justify-between mt-4">
-          <button
-            disabled={page === 1}
-            className="
-              bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
-              rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
-            "
-            onClick={() => { setPage(page - 1); }}
-          >
-            Previous
-          </button>
-          <div className="flex flex-col items-center mt-4">
-          <button
-            className="
-              mb-4 p-2 bg-green-600 hover:bg-green-700 text-white font-semibold 
-              rounded transition focus:outline-none focus:ring-2 focus:ring-green-300
-            "
-            onClick={() => { setShowModal(true); }}
-          >
-            Register User
-          </button>
-        </div>
-          <button
-            className="
-              bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
-              rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
-            "
-            onClick={() => { setPage(page + 1); }}
-          >
-            Next
-          </button>
-          
-        </div>
-        <RegisterUserModal
-          setShowModal={setShowModal}
-          showModal={showModal}
-          onRegister={handleRegisterUser}
-        />
-        {selectedUser && (
-          <UpdateUserModal
-            setShowModal={setShowUpdateModal}
-            showModal={showUpdateModal}
-            user={selectedUser}
-            onUpdate={handleUpdateUser}
-          />
-        )}
-        {/* Toast de confirmación */}
-        {showToast && (
-          <Toast
-            message="Usuario registrado exitosamente"
-            onClose={() => { setShowToast(false); }}
-          />
-        )}
-      </main>
-    </div>
+          )}
+          {/* Toast de confirmación */}
+          {showToast && (
+            <Toast
+              message="Usuario registrado exitosamente"
+              onClose={() => {
+                setShowToast(false);
+              }}
+            />
+          )}
+        </main>
+      </div>
+    </Layout>
   );
 };
 
