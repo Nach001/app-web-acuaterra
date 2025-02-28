@@ -31,10 +31,10 @@ const UserTable: React.FC<UserTableProps> = ({ users, onDeleteUser, onUpdateUser
 						<td className="py-2">{user.sede}</td>
 						<td className="py-2">{user.rol}</td>
 						<td className="py-2">
-							<button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => { onUpdateUser(user); }}>
+							<button className="bg-primary hover:bg-secondary text-white px-2 py-1 rounded" onClick={() => { onUpdateUser(user); }}>
 								Editar
 							</button>
-							<button className="bg-red-500 text-white px-2 py-1 rounded ml-2"   onClick={() => { onDeleteUser(user.id_persona); }}>
+							<button className="bg-darkGray hover:bg-veryDark text-white px-2 py-1 rounded ml-2"   onClick={() => { onDeleteUser(user.id_persona); }}>
 								Eliminar
 							</button>
 						</td>

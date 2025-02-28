@@ -25,10 +25,10 @@ const ModuleTable: React.FC<ModuleTableProps> = ({ modules, onDelete, onEdit }) 
                         <td className="py-2">{module.nombre}</td>
                         <td className="py-2">{module.dimensiones}</td>
                         <td className="py-2">
-                            <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => { onEdit(module); }}>
+                            <button className="bg-primary hover:bg-secondary text-white px-2 py-1 rounded" onClick={() => { onEdit(module); }}>
                                 Editar
                             </button>
-                            <button className="bg-red-500 text-white px-2 py-1 rounded ml-2" onClick={() => { onDelete(module.id_modulo); }}>
+                            <button className="bg-darkGray hover:bg-veryDark text-white px-2 py-1 rounded ml-2" onClick={() => { onDelete(module.id_modulo); }}>
                                 Eliminar
                             </button>
                         </td>

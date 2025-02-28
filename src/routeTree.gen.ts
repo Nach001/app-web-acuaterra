@@ -12,8 +12,16 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as UsersImport } from './routes/users'
+import { Route as UserRegisterImport } from './routes/userRegister'
+import { Route as ReportImport } from './routes/report'
+import { Route as NewHomeImport } from './routes/newHome'
+import { Route as ModuleRegisterImport } from './routes/moduleRegister'
 import { Route as ModuleImport } from './routes/module'
+<<<<<<< HEAD
 import { Route as BitacorasImport } from './routes/bitacoras'
+=======
+import { Route as HomeImport } from './routes/home'
+>>>>>>> estilosTailwind
 import { Route as AuthImport } from './routes/auth'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
@@ -25,6 +33,26 @@ const UsersRoute = UsersImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const UserRegisterRoute = UserRegisterImport.update({
+  path: '/userRegister',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ReportRoute = ReportImport.update({
+  path: '/report',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NewHomeRoute = NewHomeImport.update({
+  path: '/newHome',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ModuleRegisterRoute = ModuleRegisterImport.update({
+  path: '/moduleRegister',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ModuleRoute = ModuleImport.update({
   path: '/module',
   getParentRoute: () => rootRoute,
@@ -32,6 +60,8 @@ const ModuleRoute = ModuleImport.update({
 
 const BitacorasRoute = BitacorasImport.update({
   path: '/bitacoras',
+const HomeRoute = HomeImport.update({
+  path: '/home',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -75,11 +105,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
+<<<<<<< HEAD
     '/bitacoras': {
       id: '/bitacoras'
       path: '/bitacoras'
       fullPath: '/bitacoras'
       preLoaderRoute: typeof BitacorasImport
+=======
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeImport
+>>>>>>> estilosTailwind
       parentRoute: typeof rootRoute
     }
     '/module': {
@@ -87,6 +125,34 @@ declare module '@tanstack/react-router' {
       path: '/module'
       fullPath: '/module'
       preLoaderRoute: typeof ModuleImport
+      parentRoute: typeof rootRoute
+    }
+    '/moduleRegister': {
+      id: '/moduleRegister'
+      path: '/moduleRegister'
+      fullPath: '/moduleRegister'
+      preLoaderRoute: typeof ModuleRegisterImport
+      parentRoute: typeof rootRoute
+    }
+    '/newHome': {
+      id: '/newHome'
+      path: '/newHome'
+      fullPath: '/newHome'
+      preLoaderRoute: typeof NewHomeImport
+      parentRoute: typeof rootRoute
+    }
+    '/report': {
+      id: '/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ReportImport
+      parentRoute: typeof rootRoute
+    }
+    '/userRegister': {
+      id: '/userRegister'
+      path: '/userRegister'
+      fullPath: '/userRegister'
+      preLoaderRoute: typeof UserRegisterImport
       parentRoute: typeof rootRoute
     }
     '/users': {
@@ -105,8 +171,16 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AboutRoute,
   AuthRoute,
+<<<<<<< HEAD
   BitacorasRoute,
+=======
+  HomeRoute,
+>>>>>>> estilosTailwind
   ModuleRoute,
+  ModuleRegisterRoute,
+  NewHomeRoute,
+  ReportRoute,
+  UserRegisterRoute,
   UsersRoute,
 })
 
@@ -121,8 +195,16 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/about",
         "/auth",
+<<<<<<< HEAD
         "/bitacoras",
+=======
+        "/home",
+>>>>>>> estilosTailwind
         "/module",
+        "/moduleRegister",
+        "/newHome",
+        "/report",
+        "/userRegister",
         "/users"
       ]
     },
@@ -135,11 +217,28 @@ export const routeTree = rootRoute.addChildren({
     "/auth": {
       "filePath": "auth.ts"
     },
+<<<<<<< HEAD
     "/bitacoras": {
       "filePath": "bitacoras.ts"
+=======
+    "/home": {
+      "filePath": "home.ts"
+>>>>>>> estilosTailwind
     },
     "/module": {
       "filePath": "module.ts"
+    },
+    "/moduleRegister": {
+      "filePath": "moduleRegister.ts"
+    },
+    "/newHome": {
+      "filePath": "newHome.ts"
+    },
+    "/report": {
+      "filePath": "report.ts"
+    },
+    "/userRegister": {
+      "filePath": "userRegister.ts"
     },
     "/users": {
       "filePath": "users.ts"

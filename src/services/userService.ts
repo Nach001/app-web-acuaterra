@@ -1,6 +1,9 @@
 const API_BASE_URL: string = import.meta.env["VITE_API_BASE_URL"] as string;
 import type { User, UserRequest } from "../common/types";
 
+//here we create ther server request to get the users(conection to the server)
+
+
 export const fetchUsers = async (): Promise<Array<User>> => {
     const token = localStorage.getItem("token");
     const response = await fetch(
