@@ -10,6 +10,7 @@ import type {
     CreateBitacoraRequest,
     FunctionComponent,
 } from '../common/types';
+import Layout from '../components/layout/layout';
 
 export const Bitacoras = (): FunctionComponent => {
     const [reload, setReload] = useState(false);
@@ -45,7 +46,8 @@ export const Bitacoras = (): FunctionComponent => {
     };
 
     return (
-        <div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
+        <Layout>
+<div className="bg-blue-300 font-bold w-screen h-screen flex flex-col justify-center items-center">
             <h1 className="text-2xl font-bold mt-4">Lista de Bitácoras</h1>
             <button
                 className="mt-4 bg-green-500 text-white p-2 rounded"
@@ -76,5 +78,7 @@ export const Bitacoras = (): FunctionComponent => {
                 onCreate={handleCreate}
             />
         </div>
+        </Layout>
+        
     );
 };
