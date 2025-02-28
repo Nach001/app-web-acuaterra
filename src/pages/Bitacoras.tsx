@@ -77,7 +77,10 @@ export const Bitacoras: FunctionComponent = () => {
                                 <img alt="Inicio" className="h-6 w-6 mr-2" src={homeIcon} />
                                 <span className="font-bold">Inicio</span>
                             </li>
-                            <li className="flex items-center p-2 bg-gray-300 transition">
+                            <li 
+                                 className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
+                                 onClick={() => navigate({ to: "/users" })}
+                                 >
                                 <img alt="Usuarios" className="h-6 w-6 mr-2" src={userIcon} />
                                 <span className="font-bold">Usuarios</span>
                             </li>
