@@ -35,6 +35,11 @@ export const Auth: FunctionComponent = () => {
            if (!password) {
                setLocalPasswordError("¡Campo contraseña es requerido!");
                hasError = true;
+
+          } else if (password.length < 6) {
+                setLocalPasswordError("¡La contraseña debe tener al menos 6 caracteres!");
+                hasError = true;   
+                 
           } else {
                setLocalPasswordError("");
              }
