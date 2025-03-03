@@ -12,7 +12,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import acuaterraLogo from "../assets/images/logo.png";
 
-// URL base de la API
+
 const API_BASE_URL: string = import.meta.env["VITE_API_BASE_URL"] as string;
 
 export const Auth: FunctionComponent = () => {
@@ -22,38 +22,36 @@ export const Auth: FunctionComponent = () => {
   const [localPasswordError, setLocalPasswordError] = useState("");
   const [localLoading, setLocalLoading] = useState(false);
 
-  // Función para manejar el login
+  
   const handleLocalLogin = async (): Promise<void> => {
-    let hasError = false;
+        let hasError = false;
+           if (!email) {
+              setLocalEmailError("¡Campo correo electrónico es requerido!");
+              hasError = true;
+          }else{
+               setLocalEmailError("");
+             }
 
-    // Validación para el campo de correo electrónico
-    if (!email) {
-      setLocalEmailError("¡Campo correo electrónico es requerido!");
-      hasError = true;
-    } else {
-      setLocalEmailError("");
-    }
+           if (!password) {
+               setLocalPasswordError("¡Campo contraseña es requerido!");
+               hasError = true;
+          } else {
+               setLocalPasswordError("");
+             }
 
-    // Validación para el campo de contraseña
-    if (!password) {
-      setLocalPasswordError("¡Campo contraseña es requerido!");
-      hasError = true;
-    } else {
-      setLocalPasswordError("");
-    }
+          if (hasError) {
+              return;
+             }
 
-    if (hasError) {
-      return;
-    }
 
     setLocalLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/users/loginMVC`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+            const response = await fetch(`${API_BASE_URL}/users/loginMVC`, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
       });
 
       if (!response.ok) {
@@ -61,56 +59,67 @@ export const Auth: FunctionComponent = () => {
       }
 
       const data = (await response.json()) as { token: string };
-      localStorage.setItem("token", data.token);
-      await navigate({ to: "/newHome" });
-    } catch (error) {
+                    localStorage.setItem("token", data.token);
+                    await navigate({ to: "/newHome" });
+                    } catch (error) {
       setLocalPasswordError("Invalid email or password");
       console.error(error);
-    } finally {
+                    } finally {
       setLocalLoading(false);
-    }
+         }
   };
 
   return (
     <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4">
-      {/* Logos */}
-      <div className="mb-6 flex flex-col items-center">
-        <img alt="Acuaterra Logo" className="h-[250px] mb-2" src={acuaterraLogo} />
-      </div>
+      
+         <div className="mb-6 flex flex-col items-center">
+               <img alt="Acuaterra Logo" className="h-[250px] mb-2" src={acuaterraLogo} />
+         </div>
+
       <h1 className="text-7xl font-bold mb-9">Login</h1>
-      <div className="w-full max-w-sm space-y-8">
-        <div>
+
+      <div className="w-full max-w-sm space-y-10">
+        
+        <div  className="flex flex-col items-center">
           <InputCustomComponent
-            name="email"
-            placeholder="Ingrese Correo Electrónico"
-            type="email"
-            value={email}
-            onChange={(event) => { setEmail(event.target.value); setLocalEmailError(""); }}
-            //showError={false} // Asegúrate de que InputCustomComponent no muestre el error internamente
-          />
-          {localEmailError && <p className="text-custom-error mt-2">{localEmailError}</p>}
+               name="email"
+               placeholder="Ingrese Correo Electrónico"
+               type="email"
+               value={email}
+               onChange={(event) => { setEmail(event.target.value); setLocalEmailError(""); }}
+               //showError={false} // Asegúrate de que InputCustomComponent no muestre el error internamente
+               />
+               {localEmailError && <p className="text-custom-error mt-2">{localEmailError}</p>}
         </div>
-        <div>
-          <InputCustomComponent
-            name="password"
-            placeholder="Ingrese Contraseña"
-            type="password"
-            value={password}
-            onChange={(event) => { setPassword(event.target.value); setLocalPasswordError(""); }}
-            //showError={false} // Asegúrate de que InputCustomComponent no muestre el error internamente
-          />
-          {localPasswordError && <p className="text-custom-error mt-2">{localPasswordError}</p>}
+
+
+        <div  className="flex flex-col items-center">
+             <InputCustomComponent
+               name="password"
+               placeholder="Ingrese Contraseña"
+               type="password"
+               value={password}
+               onChange={(event) => { setPassword(event.target.value); setLocalPasswordError(""); }}
+               //showError={false} // Asegúrate de que InputCustomComponent no muestre el error internamente
+               />
+               {localPasswordError && <p className="text-custom-error mt-2">{localPasswordError}</p>}
         </div>
+
+        
+        <div  className="flex flex-col items-center">
         <ButtonComponent
-          className="bg-[#44cbd3] hover:bg-[#3cacac] text-white px-4 py-2 rounded transition focus:outline-none focus:ring-2 focus:ring-[#44cbd3] focus:ring-offset-2"
-          disabled={localLoading || loading}
-          type="button"
-          onClick={handleLocalLogin}
-        >
-          {localLoading || loading ? "Cargando..." : "Comenzar!"}
+              className="bg-[#44cbd3] hover:bg-[#3cacac] text-white px-4 py-2   rounded transition focus:outline-none focus:ring-2 focus:ring-[#44cbd3] focus:ring-offset-2  "
+              disabled={localLoading || loading}
+              type="button"
+              onClick={handleLocalLogin}
+              >
+              {localLoading || loading ? "Cargando..." : "Comenzar!"}
         </ButtonComponent>
+        </div>
       </div>
+
       <p className="text-gray-500 text-sm mt-20">versión 1.0 - Advanced Aquaponics Monitoring System</p>
+    
     </div>
   );
 };
