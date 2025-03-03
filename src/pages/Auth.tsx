@@ -23,6 +23,12 @@ export const Auth: FunctionComponent = () => {
 
   // Función para manejar el login
   const handleLocalLogin = async (): Promise<void> => {
+    // Validación para el campo de correo electrónico
+    if (!email) {
+      setLocalError("Campo correo electrónico es requerido");
+      return;
+    }
+
     setLocalLoading(true);
     try {
       const response = await fetch(`${API_BASE_URL}/users/loginMVC`, {
@@ -56,22 +62,28 @@ export const Auth: FunctionComponent = () => {
       </div>
       <h1 className="text-7xl font-bold mb-9">Login</h1>
       <div className="w-full max-w-sm space-y-8">
-        <InputCustomComponent
-          error={localError || error}
-          name="email"
-          placeholder="Ingrese Correo Electrónico"
-          type="email"
-          value={email}
-          onChange={(event) => { setEmail(event.target.value); }}
-        />
-        <InputCustomComponent
-          error={localError || error}
-          name="password"
-          placeholder="Ingrese Contraseña"
-          type="password"
-          value={password}
-          onChange={(event) => { setPassword(event.target.value); }}
-        />
+        <div>
+          <InputCustomComponent
+            //error={localError || error}
+            name="email"
+            placeholder="Ingrese Correo Electrónico"
+            type="email"
+            value={email}
+            onChange={(event) => { setEmail(event.target.value); setLocalError(""); }}
+          />
+          {localError && <p className="text-veryDark mt-2">{localError}</p>}
+        </div>
+        <div>
+          <InputCustomComponent
+            error={error}
+            name="password"
+            placeholder="Ingrese Contraseña"
+            type="password"
+            value={password}
+            onChange={(event) => { setPassword(event.target.value); }}
+          />
+          {error && <p className="text-red-500 mt-2">{error}</p>}
+        </div>
         <ButtonComponent
           className="bg-[#44cbd3] hover:bg-[#3cacac] text-white px-4 py-2 rounded transition focus:outline-none focus:ring-2 focus:ring-[#44cbd3] focus:ring-offset-2"
           disabled={localLoading || loading}
@@ -81,7 +93,6 @@ export const Auth: FunctionComponent = () => {
           {localLoading || loading ? "Cargando..." : "Comenzar!"}
         </ButtonComponent>
       </div>
-      {(localError || error) && <p className="text-red-500 mt-2">{localError || error}</p>}
       <p className="text-gray-500 text-sm mt-20">versión 1.0 - Advanced Aquaponics Monitoring System</p>
     </div>
   );

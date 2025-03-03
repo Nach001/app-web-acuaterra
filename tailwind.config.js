@@ -13,8 +13,9 @@ export default {
         lightGray: "#ccd7d6",
         greenish: "#6ca09c",
         teal: "#649c94",
-        darkGray: "#5d7a7e",
+        darkGray: "#5d7a7e", //ErrorMesagge color
         veryDark: "#303537",
+        
       },
       fontFamily: {
         sans: ["Roboto", "sans-serif"],// Fuentes especificadas para el proyecto
@@ -25,6 +26,7 @@ export default {
         h2: ["1.5rem", { lineHeight: "2rem" }],       // 24px aprox.
         h3: ["1.25rem", { lineHeight: "1.75rem" }],    // 20px aprox.
       },
+      
     },
   },
   plugins: [],
