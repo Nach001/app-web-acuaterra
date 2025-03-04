@@ -1,3 +1,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@layer base {
+    .focus-visible {
+      outline: 2px solid #3cacac; /* color de la paleta */
+      outline-offset: 2px;
+    }
+  }
