@@ -16,7 +16,7 @@ const Sidebar: FunctionComponent = () => {
                     Module
                 </Link>
                 <Link className="p-2 hover:bg-gray-700 rounded" to="/bitacoras">
-                    Bitacoras
+                    Binnacles
                 </Link>
                 {/* Agrega más enlaces según sea necesario */}
             </nav>

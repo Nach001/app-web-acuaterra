@@ -16,14 +16,17 @@ import useRegisterUser from "../hooks/useRegisterUser";
 import { deleteUser, updateUser } from "../services/userService";
 import Layout from "../components/layout/layout";
 import { useNavigate } from "@tanstack/react-router";
+import Toast from "../components/ui/Toast";
+import LogoutButton from "../components/ui/button/logoutButton";
+import Spinner from "../components/ui/Spinner";
+
 import closeSessionIcon from "../assets/images/cerrar-sesion.png";
 import userIcon from "../assets/images/userlogo.png";
 import moduleIcon from "../assets/images/module.png";
 import homeIcon from "../assets/images/home.png";
 import acuaterraLogo from "../assets/images/logo.png";
 import reportIcon from "../assets/images/reporte.png";
-import Toast from "../components/ui/Toast";
-import Spinner from "../components/ui/Spinner";
+
 
 export const Users: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -68,7 +71,6 @@ export const Users: FunctionComponent = () => {
 
   
   const filteredUsers = users.filter(user =>
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -80,7 +82,7 @@ export const Users: FunctionComponent = () => {
 
 
         {/* Sidebar con fondo gris (bg-gray-300) */}
-        <aside className="w-64 bg-gray-300 border-r border-gray-300 flex flex-col shadow-lg">
+        <aside className="w-64 bg-gray-300 border-r border-gray-300 flex flex-col shadow-lg md:w-1/4 lg:w-1/5">
           <div className="p-4 flex flex-col items-center">
             <img alt="Acuaterra Logo" className="h-16 mb-2" src={acuaterraLogo} />
             <p className="text-gray-700 font-semibold">Bienvenido, usuario!</p>
@@ -121,13 +123,10 @@ export const Users: FunctionComponent = () => {
             {/* Grupo 2: "Cerrar Sesión" en un bloque separado */}
             <div className="mt-60">
               <ul className="space-y-4">
-                <li
-                  className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
-                  onClick={() => navigate({ to: "/auth" })}
-                >
-                  <img alt="Cerrar Sesión" className="h-6 w-6 mr-2" src={closeSessionIcon} />
-                  <span className="font-bold">Cerrar Sesión</span>
-                </li>
+              <li className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105">
+                    <img alt="Cerrar Sesión" className="h-6 w-6 mr-2" src={closeSessionIcon} />
+                    <span className="font-bold"><LogoutButton /></span>
+                     </li>
               </ul>
             </div>
           </nav>
@@ -144,27 +143,27 @@ export const Users: FunctionComponent = () => {
         </aside>
 
         {/* Contenido principal */}
-        <main className="flex-1 p-6 bg-white shadow-lg rounded-lg">
+        <main className="flex-1 p-4 md:p-6 bg-white shadow-lg rounded-lg">
           <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
 
           <div className="flex flex-col space-y-4 mb-4">
-            <input
-              className="p-2 border border-gray-300 rounded w-64"
+          <input
+              className="p-2 border border-gray-300 rounded w-full md:w-64"
               placeholder="Buscar usuario por nombre"
               type="text"
               value={searchTerm}
               // eslint-disable-next-line unicorn/prevent-abbreviations
               onChange={(e) => { setSearchTerm(e.target.value); }}
-            />
-            <button
+              />
+              <button
               className="
-                bg-green-600 hover:bg-green-700 text-white font-semibold 
-                py-2 px-4 rounded transition w-64
+              bg-green-600 hover:bg-green-700 text-white font-semibold 
+              py-2 px-4 rounded transition w-full md:w-64
               "
               onClick={() => { setShowModal(true); }}
-            >
+              >
               Registrar Nuevo Usuario
-            </button>
+              </button>
           </div>
           
           {loading && (
