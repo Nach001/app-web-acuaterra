@@ -1,6 +1,8 @@
 import type { FC, ChangeEventHandler } from "react";
 // eslint-disable-next-line no-duplicate-imports
 import { useState } from "react";
+import showIcon from "../../../assets/images/showIconB.png";
+import hideIcon from "../../../assets/images/hideIconB.png";
 
 interface InputProps {
 	name: string;
@@ -26,7 +28,7 @@ const InputCustomComponent: FC<InputProps> = ({
 	};
 
 	return (
-		<div className="input-component">
+		<div className="input-component relative">
 			<input
 				className="input-field"
 				name={name}
@@ -37,12 +39,16 @@ const InputCustomComponent: FC<InputProps> = ({
 			/>
 			{type === "password" && (
 				<button
-					className="toggle-password"
-					type="button"
-					onClick={toggleShowPassword}
-				>
-					{showPassword ? "Ocultar" : "Mostar"}
-				</button>
+				className="toggle-password absolute right-2 top-1/2 transform -translate-y-1/2"
+				type="button"
+				onClick={toggleShowPassword}
+			  >
+				<img
+				  alt={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+				  className="h-6 w-6"
+				  src={showPassword ? hideIcon : showIcon}
+				/>
+			  </button>
 			)}
 			{error && <span className="error">{error}</span>}
 		</div>
