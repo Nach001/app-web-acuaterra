@@ -1,4 +1,3 @@
-// src/components/ui/Toast.tsx
 import type { FC } from "react";
 
 interface ToastProps {
@@ -8,11 +7,13 @@ interface ToastProps {
 
 const Toast: FC<ToastProps> = ({ message, onClose }) => {
   return (
-    <div className="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow-lg flex items-center space-x-2 animate-fadeIn">
-      <p>{message}</p>
-      <button className="font-bold" onClick={onClose}>
-        X
-      </button>
+    <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg z-50">
+      <div className="flex items-center justify-between">
+        <span>{message}</span>
+        <button className="ml-4" onClick={onClose}>
+          &times;
+        </button>
+      </div>
     </div>
   );
 };
