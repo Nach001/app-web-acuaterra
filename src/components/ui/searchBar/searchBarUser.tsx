@@ -1,10 +1,10 @@
-interface SearchModuleInputProps {
+interface SearchUserInputProps {
 	onSearchChange: (value: string) => void;
 }
 
-const SearchModuleInput = ({
+const SearchUserInput = ({
 	onSearchChange,
-}: SearchModuleInputProps): JSX.Element | null => {
+}: SearchUserInputProps): JSX.Element | null => {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		onSearchChange(event.target.value);
 	};
@@ -12,7 +12,7 @@ const SearchModuleInput = ({
 	return (
 		<input
 			className="search-input"
-			placeholder="Buscar módulo por nombre"
+			placeholder="Buscar usuario por nombre"
 			type="text"
 			onChange={handleChange}
 		/>
@@ -20,4 +20,4 @@ const SearchModuleInput = ({
 };
 
 
-export default SearchModuleInput;
+export default SearchUserInput;

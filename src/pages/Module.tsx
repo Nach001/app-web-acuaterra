@@ -128,6 +128,9 @@ export const Module: FunctionComponent = () => {
               <span className="font-bold">Bitacoras</span>
              </li> 
             </ul>
+
+
+
             {/* Grupo 2: "Cerrar Sesión" en bloque separado */}
             <div className="mt-60">
               <ul className="space-y-4">
@@ -141,6 +144,8 @@ export const Module: FunctionComponent = () => {
               </ul>
             </div>
           </nav>
+
+
           {/* Footer: Texto del footer subido un poco */}
           <div className="p-0">
             <p className="text-center text-xs mt-2">
@@ -148,6 +153,7 @@ export const Module: FunctionComponent = () => {
             </p>
           </div>
         </aside>
+
 
         {/* Contenido principal */}
         <main className="flex-1 p-6">

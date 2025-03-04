@@ -17,6 +17,7 @@ import { deleteUser, updateUser } from "../services/userService";
 import Layout from "../components/layout/layout";
 import { useNavigate } from "@tanstack/react-router";
 
+
 // Íconos e imágenes
 import closeSessionIcon from "../assets/images/cerrar-sesion.png";
 import userIcon from "../assets/images/userlogo.png";
@@ -24,7 +25,7 @@ import moduleIcon from "../assets/images/module.png";
 import homeIcon from "../assets/images/home.png";
 import acuaterraLogo from "../assets/images/logo.png";
 import reportIcon from "../assets/images/reporte.png";
-import binnacleIcon from "../assets/images/bitacora.png";
+
 
 // Toast y Spinner
 import Toast from "../components/ui/Toast";
@@ -81,7 +82,7 @@ export const Users: FunctionComponent = () => {
     <Layout>
       <div className="flex min-h-screen bg-white">
         {/* Sidebar con fondo gris (bg-gray-300) */}
-        <aside className="w-64 bg-gray-300 border-r border-gray-300 flex flex-col">
+        <aside className="w-64 bg-gray-300 border-r border-gray-300 flex flex-col shadow-lg">
           <div className="p-4 flex flex-col items-center">
             <img alt="Acuaterra Logo" className="h-16 mb-2" src={acuaterraLogo} />
             <p className="text-gray-700 font-semibold">Bienvenido, usuario!</p>
@@ -116,13 +117,7 @@ export const Users: FunctionComponent = () => {
                 <img alt="Reporte" className="h-6 w-6 mr-2" src={reportIcon} />
                 <span className="font-bold">Reporte</span>
               </li>
-              <li
-              className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
-              onClick={() => navigate({ to: "/bitacoras" })}
-                >
-              <img alt="Reporte" className="h-6 w-6 mr-2" src={binnacleIcon} />
-              <span className="font-bold">Bitacoras</span>
-             </li>
+              
 
             </ul>
             {/* Grupo 2: "Cerrar Sesión" en un bloque separado */}
@@ -148,8 +143,23 @@ export const Users: FunctionComponent = () => {
         </aside>
 
         {/* Contenido principal */}
-        <main className="flex-1 p-6">
-          <p className="text-gray-700 font-semibold">Lista de Usuarios</p>
+        <main className="flex-1 p-6 bg-white shadow-lg rounded-lg">
+        <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
+       
+
+     
+
+           <button
+               className="
+               mt-4  bg-green-600 hover:bg-green-700 text-white font-semibold 
+               py-2 px-4 rounded transition
+               "
+               onClick={() => {
+               setShowModal(true);
+               }}
+               >
+               Registrar Nuevo Usuario
+            </button>
           {loading && (
             <div className="mt-4">
               <Spinner />
@@ -178,43 +188,32 @@ export const Users: FunctionComponent = () => {
             </div>
           )}
           <div className="flex justify-between mt-4">
-            <button
-              disabled={page === 1}
-              className="
+             <button
+                className="
                 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
                 rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
-              "
-              onClick={() => {
-                setPage(page - 1);
-              }}
-            >
-              Previous
-            </button>
-            <div className="flex flex-col items-center mt-4">
-              <button
-                className="
-                  mb-4 p-2 bg-green-600 hover:bg-green-700 text-white font-semibold 
-                  rounded transition focus:outline-none focus:ring-2 focus:ring-green-300
                 "
                 onClick={() => {
-                  setShowModal(true);
+                setPage(page - 1);
                 }}
-              >
-                Register User
-              </button>
-            </div>
-            <button
-              className="
-                bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
-                rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
-              "
-              onClick={() => {
-                setPage(page + 1);
-              }}
-            >
-              Next
+                >
+                Previous
             </button>
-          </div>
+
+            <button
+               className="
+               bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
+               rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
+               "
+               onClick={() => {
+               setPage(page + 1);
+               }}
+               >
+               Next
+           </button>
+         </div>
+
+
           <RegisterUserModal
             setShowModal={setShowModal}
             showModal={showModal}
