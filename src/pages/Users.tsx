@@ -16,35 +16,27 @@ import useRegisterUser from "../hooks/useRegisterUser";
 import { deleteUser, updateUser } from "../services/userService";
 import Layout from "../components/layout/layout";
 import { useNavigate } from "@tanstack/react-router";
-
-
-// Íconos e imágenes
 import closeSessionIcon from "../assets/images/cerrar-sesion.png";
 import userIcon from "../assets/images/userlogo.png";
 import moduleIcon from "../assets/images/module.png";
 import homeIcon from "../assets/images/home.png";
 import acuaterraLogo from "../assets/images/logo.png";
 import reportIcon from "../assets/images/reporte.png";
-
-
-// Toast y Spinner
 import Toast from "../components/ui/Toast";
 import Spinner from "../components/ui/Spinner";
 
 export const Users: FunctionComponent = () => {
   const navigate = useNavigate();
-  const [page, setPage] = useState(1);
+  const [page, /* setPage*/] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [reload, setReload] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
   const pageSize = 10;
   const { users, loading, error } = useUsers(page, pageSize, reload);
   const { registerUser } = useRegisterUser();
-
-  // Para mostrar un toast cuando se registre un usuario exitosamente
   const [showToast, setShowToast] = useState(false);
-
   const handleRegisterUser = async (userData: UserRequest): Promise<void> => {
     try {
       await registerUser(userData);
@@ -61,7 +53,7 @@ export const Users: FunctionComponent = () => {
     setReload(!reload);
   };
 
-  const handleUpdateUser = async (                                          // Merged Const
+  const handleUpdateUser = async (
     userId: number,
     userData: UserRequest
   ): Promise<void> => {
@@ -69,18 +61,24 @@ export const Users: FunctionComponent = () => {
     setReload(!reload);
   };
 
-  const handleOpenUpdateModal = (user: User): void => {                     // Merged Const
+  const handleOpenUpdateModal = (user: User): void => {
     setSelectedUser(user);
     setShowUpdateModal(true);
   };
 
+  
+  const filteredUsers = users.filter(user =>
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
 
-  // Integración de la página de usuarios
 
   return (
     <Layout>
-      <div className="flex min-h-screen bg-white">
+      <div className="flex min-h-screen bg-gradient-to-r from-blue-100 to-blue-300">
+
+
         {/* Sidebar con fondo gris (bg-gray-300) */}
         <aside className="w-64 bg-gray-300 border-r border-gray-300 flex flex-col shadow-lg">
           <div className="p-4 flex flex-col items-center">
@@ -89,7 +87,7 @@ export const Users: FunctionComponent = () => {
           </div>
           <nav className="flex-1">
 
-            
+
             {/* Grupo 1: "Inicio", "Usuarios" y "Módulos" */}
             <ul className="space-y-20 mt-20">
               <li
@@ -117,9 +115,9 @@ export const Users: FunctionComponent = () => {
                 <img alt="Reporte" className="h-6 w-6 mr-2" src={reportIcon} />
                 <span className="font-bold">Reporte</span>
               </li>
-              
-
             </ul>
+
+
             {/* Grupo 2: "Cerrar Sesión" en un bloque separado */}
             <div className="mt-60">
               <ul className="space-y-4">
@@ -133,9 +131,12 @@ export const Users: FunctionComponent = () => {
               </ul>
             </div>
           </nav>
+
+
+          
           {/* Footer: Texto del footer subido un poco */}
-          <div className="p-0">
-            <p className="text-center text-xs mt-2">
+          <div className="p-0 mt-4 md:mt-2">
+            <p className="text-center text-xs">
               versión 1.0 <br />
               Advanced Aquaponics Monitoring System
             </p>
@@ -144,22 +145,28 @@ export const Users: FunctionComponent = () => {
 
         {/* Contenido principal */}
         <main className="flex-1 p-6 bg-white shadow-lg rounded-lg">
-        <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
-       
+          <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
 
-     
-
-           <button
-               className="
-               mt-4  bg-green-600 hover:bg-green-700 text-white font-semibold 
-               py-2 px-4 rounded transition
-               "
-               onClick={() => {
-               setShowModal(true);
-               }}
-               >
-               Registrar Nuevo Usuario
+          <div className="flex flex-col space-y-4 mb-4">
+            <input
+              className="p-2 border border-gray-300 rounded w-64"
+              placeholder="Buscar usuario por nombre"
+              type="text"
+              value={searchTerm}
+              // eslint-disable-next-line unicorn/prevent-abbreviations
+              onChange={(e) => { setSearchTerm(e.target.value); }}
+            />
+            <button
+              className="
+                bg-green-600 hover:bg-green-700 text-white font-semibold 
+                py-2 px-4 rounded transition w-64
+              "
+              onClick={() => { setShowModal(true); }}
+            >
+              Registrar Nuevo Usuario
             </button>
+          </div>
+          
           {loading && (
             <div className="mt-4">
               <Spinner />
@@ -181,39 +188,33 @@ export const Users: FunctionComponent = () => {
           {!loading && !error && (
             <div className="overflow-x-auto">
               <UserTable
-                users={users}
+                users={filteredUsers} // Usar usuarios filtrados
                 onDeleteUser={handleDeleteUser}
                 onUpdateUser={handleOpenUpdateModal}
               />
             </div>
           )}
-          <div className="flex justify-between mt-4">
-             <button
-                className="
+          {/* <div className="flex justify-between mt-4">
+            <button
+              disabled={page === 1}
+              className="
                 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
                 rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
-                "
-                onClick={() => {
-                setPage(page - 1);
-                }}
-                >
-                Previous
+              "
+              onClick={() => setPage(page - 1)}
+            >
+              Previous
             </button>
-
             <button
-               className="
-               bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
-               rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
-               "
-               onClick={() => {
-               setPage(page + 1);
-               }}
-               >
-               Next
-           </button>
-         </div>
-
-
+              className="
+                bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
+                rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
+              "
+              onClick={() => setPage(page + 1)}
+            >
+              Next
+            </button>
+          </div> */}
           <RegisterUserModal
             setShowModal={setShowModal}
             showModal={showModal}
@@ -231,9 +232,7 @@ export const Users: FunctionComponent = () => {
           {showToast && (
             <Toast
               message="Usuario registrado exitosamente"
-              onClose={() => {
-                setShowToast(false);
-              }}
+              onClose={() => { setShowToast(false); }}
             />
           )}
         </main>

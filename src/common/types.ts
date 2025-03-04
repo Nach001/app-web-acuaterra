@@ -42,6 +42,7 @@ export interface UpdateModuleRequest {
 }
 
 export interface User {
+  name: unknown;
 	id_persona: number;
 	nombre: string;
 	email: string;
