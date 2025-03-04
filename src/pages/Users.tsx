@@ -78,11 +78,9 @@ export const Users: FunctionComponent = () => {
 
   return (
     <Layout>
-      <div className="flex min-h-screen bg-gradient-to-r from-blue-100 to-blue-300">
-
-
+     <div className="flex flex-col md:flex-row min-h-screen font-sans bg-gradient-to-r from-blue-100 to-blue-300">
         {/* Sidebar con fondo gris (bg-gray-300) */}
-        <aside className="w-64 bg-gray-300 border-r border-gray-300 flex flex-col shadow-lg md:w-1/4 lg:w-1/5">
+        <aside className="w-full md:w-64 bg-gray-300 border-r border-gray-300 flex flex-col shadow-lg">
           <div className="p-4 flex flex-col items-center">
             <img alt="Acuaterra Logo" className="h-16 mb-2" src={acuaterraLogo} />
             <p className="text-gray-700 font-semibold">Bienvenido, usuario!</p>
@@ -91,7 +89,7 @@ export const Users: FunctionComponent = () => {
 
 
             {/* Grupo 1: "Inicio", "Usuarios" y "Módulos" */}
-            <ul className="space-y-20 mt-20">
+            <ul className="space-y-4 mt-4 md:space-y-20 md:mt-20">
               <li
                 className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105"
                 onClick={() => navigate({ to: "/newHome" })}

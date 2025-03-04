@@ -11,11 +11,11 @@ interface LayoutProps {
 
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
 	return (
-		<div className="flex">
+		<div className="flex flex-col min-h-screen">
 			 {/*<Sidebar /> */}
-			<div className="flex-1">
+			 <div className="flex-1 flex flex-col">
 				 {/*<Navbar />*/}
-				<main className="p-4">{children}</main>
+				 <main className="flex-1 p-4">{children}</main>
 			</div>
 		</div>
 	);
