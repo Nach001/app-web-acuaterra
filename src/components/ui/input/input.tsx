@@ -41,7 +41,7 @@ const InputCustomComponent: FC<InputProps> = ({
 					type="button"
 					onClick={toggleShowPassword}
 				>
-					{showPassword ? "Hide" : "Show"}
+					{showPassword ? "Ocultar" : "Mostar"}
 				</button>
 			)}
 			{error && <span className="error">{error}</span>}
