@@ -25,7 +25,7 @@ const Report: FC = () => {
   return (
     <div className="flex min-h-screen font-sans bg-white">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-300 border-r border-gray-300 flex flex-col">
+      <aside className="w-full md:w-64 bg-gray-300 border-r border-gray-300 flex flex-col shadow-lg">
         <div className="p-4 flex flex-col items-center">
           <img alt="Acuaterra Logo" className="h-16 mb-2" src={acuaterraLogo} />
           <p className="text-gray-700 font-semibold">Bienvenido, usuario!</p>
@@ -33,7 +33,7 @@ const Report: FC = () => {
 
         <nav className="flex-1">
           {/* Grupo 1: Elementos principales */}
-          <ul className="space-y-20 mt-20">
+          <ul className="space-y-4 mt-4 md:space-y-20 md:mt-20">
             <li
               className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-400 hover:scale-105"
               onClick={() => navigate({ to: "/newHome" })}
@@ -86,7 +86,7 @@ const Report: FC = () => {
       </aside>
 
       {/* Contenido principal */}
-      <main className="flex-1 p-6 bg-white">
+      <main className="flex-1 p-4 md:p-6 bg-white shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold mb-4">Reportes</h1>
         <p className="text-gray-600 mb-6">Visualización y generación de reportes.</p>
         {/* Aquí podrías agregar tablas, gráficos o tarjetas dependiendo de tu Figma */}
