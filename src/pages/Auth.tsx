@@ -99,7 +99,7 @@ export const Auth: FunctionComponent = () => {
                   type="email"
                   value={email}
                   onChange={(event) => { setEmail(event.target.value); setLocalEmailError(""); }}
-                  //showError={false} // Asegúrate de que InputCustomComponent no muestre el error internamente
+                  //showError={false} 
                   />
                   {localEmailError && <p className="text-custom-error mt-2">{localEmailError}</p>}
            </div>
@@ -112,7 +112,7 @@ export const Auth: FunctionComponent = () => {
                  type="password"
                  value={password}
                  onChange={(event) => { setPassword(event.target.value); setLocalPasswordError(""); }}
-                 //showError={false} // Asegúrate de que InputCustomComponent no muestre el error internamente
+                 //showError={false} 
                  />
                  {localPasswordError && <p className="text-custom-error mt-2">{localPasswordError}</p>}
             </div>
@@ -125,7 +125,7 @@ export const Auth: FunctionComponent = () => {
                  type="button"
                  onClick={handleLocalLogin}
                  >
-                {localLoading || loading ? "Cargando..." : "Comenzar!"}
+                {localLoading || loading ? "Cargando..." : "¡Comenzar!"}
              </ButtonComponent>
         </div>
     </div>
