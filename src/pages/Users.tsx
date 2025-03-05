@@ -27,7 +27,6 @@ import homeIcon from "../assets/images/home.png";
 import acuaterraLogo from "../assets/images/logo.png";
 import reportIcon from "../assets/images/reporte.png";
 
-
 export const Users: FunctionComponent = () => {
   const navigate = useNavigate();
   const [page, /* setPage*/] = useState(1);
@@ -40,11 +39,14 @@ export const Users: FunctionComponent = () => {
   const { users, loading, error } = useUsers(page, pageSize, reload);
   const { registerUser } = useRegisterUser();
   const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState(""); // Estado para el mensaje del toast
+
   const handleRegisterUser = async (userData: UserRequest): Promise<void> => {
     try {
       await registerUser(userData);
       setReload(!reload);
       setShowModal(false);
+      setToastMessage("Usuario registrado exitosamente");
       setShowToast(true); // Mostramos la notificación
     } catch (error) {
       console.error(error);
@@ -52,8 +54,13 @@ export const Users: FunctionComponent = () => {
   };
 
   const handleDeleteUser = async (userId: number): Promise<void> => {
-    await deleteUser(userId);
-    setReload(!reload);
+    const confirmDelete = window.confirm("¿Desea borrar este usuario?");
+    if (confirmDelete) {
+      await deleteUser(userId);
+      setReload(!reload);
+      setToastMessage("Usuario eliminado exitosamente");
+      setShowToast(true); // Mostramos la notificación
+    }
   };
 
   const handleUpdateUser = async (
@@ -62,6 +69,9 @@ export const Users: FunctionComponent = () => {
   ): Promise<void> => {
     await updateUser(userId, userData);
     setReload(!reload);
+    setShowUpdateModal(false);
+    setToastMessage("Usuario actualizado exitosamente");
+    setShowToast(true); // Mostramos la notificación
   };
 
   const handleOpenUpdateModal = (user: User): void => {
@@ -69,16 +79,13 @@ export const Users: FunctionComponent = () => {
     setShowUpdateModal(true);
   };
 
-  
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-
-
   return (
     <Layout>
-     <div className="flex flex-col md:flex-row min-h-screen font-sans bg-gradient-to-r from-blue-100 to-blue-300">
+      <div className="flex flex-col md:flex-row min-h-screen font-sans bg-gradient-to-r from-blue-100 to-blue-300">
         {/* Sidebar con fondo gris (bg-gray-300) */}
         <aside className="w-full md:w-64 bg-gray-300 border-r border-gray-300 flex flex-col shadow-lg">
           <div className="p-4 flex flex-col items-center">
@@ -86,8 +93,6 @@ export const Users: FunctionComponent = () => {
             <p className="text-gray-700 font-semibold">Bienvenido, usuario!</p>
           </div>
           <nav className="flex-1">
-
-
             {/* Grupo 1: "Inicio", "Usuarios" y "Módulos" */}
             <ul className="space-y-4 mt-4 md:space-y-20 md:mt-20">
               <li
@@ -117,20 +122,17 @@ export const Users: FunctionComponent = () => {
               </li>
             </ul>
 
-
             {/* Grupo 2: "Cerrar Sesión" en un bloque separado */}
             <div className="mt-60">
               <ul className="space-y-4">
-              <li className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105">
-                    <img alt="Cerrar Sesión" className="h-6 w-6 mr-2" src={closeSessionIcon} />
-                    <span className="font-bold"><LogoutButton /></span>
-                     </li>
+                <li className="flex items-center p-2 cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:scale-105">
+                  <img alt="Cerrar Sesión" className="h-6 w-6 mr-2" src={closeSessionIcon} />
+                  <span className="font-bold"><LogoutButton /></span>
+                </li>
               </ul>
             </div>
           </nav>
 
-
-          
           {/* Footer: Texto del footer subido un poco */}
           <div className="p-0 mt-4 md:mt-2">
             <p className="text-center text-xs">
@@ -145,23 +147,23 @@ export const Users: FunctionComponent = () => {
           <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
 
           <div className="flex flex-col space-y-4 mb-4">
-          <input
+            <input
               className="p-2 border border-gray-300 rounded w-full md:w-64"
               placeholder="Buscar usuario por nombre"
               type="text"
               value={searchTerm}
               // eslint-disable-next-line unicorn/prevent-abbreviations
               onChange={(e) => { setSearchTerm(e.target.value); }}
-              />
-              <button
+            />
+            <button
               className="
               bg-green-600 hover:bg-green-700 text-white font-semibold 
               py-2 px-4 rounded transition w-full md:w-64
               "
               onClick={() => { setShowModal(true); }}
-              >
+            >
               Registrar Nuevo Usuario
-              </button>
+            </button>
           </div>
           
           {loading && (
@@ -191,27 +193,6 @@ export const Users: FunctionComponent = () => {
               />
             </div>
           )}
-          {/* <div className="flex justify-between mt-4">
-            <button
-              disabled={page === 1}
-              className="
-                bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
-                rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
-              "
-              onClick={() => setPage(page - 1)}
-            >
-              Previous
-            </button>
-            <button
-              className="
-                bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 
-                rounded transition focus:outline-none focus:ring-2 focus:ring-blue-300
-              "
-              onClick={() => setPage(page + 1)}
-            >
-              Next
-            </button>
-          </div> */}
           <RegisterUserModal
             setShowModal={setShowModal}
             showModal={showModal}
@@ -228,7 +209,7 @@ export const Users: FunctionComponent = () => {
           {/* Toast de confirmación */}
           {showToast && (
             <Toast
-              message="Usuario registrado exitosamente"
+              message={toastMessage}
               onClose={() => { setShowToast(false); }}
             />
           )}

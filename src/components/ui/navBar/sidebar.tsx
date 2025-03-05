@@ -3,9 +3,9 @@ import { Link } from "@tanstack/react-router";
 
 const Sidebar: FunctionComponent = () => {
     return (
-        <div className="bg-gray-800 text-white w-64 h-screen flex flex-col">
+        <div className="bg-gray-800 text-white w-64 min-h-screen flex flex-col">
             <div className="p-4 text-2xl font-bold">My App</div>
-            <nav className="flex flex-col p-4">
+            <nav className="flex-1 flex-col p-4">
                 <Link className="p-2 hover:bg-gray-700 rounded" to="/">
                     Home
                 </Link>

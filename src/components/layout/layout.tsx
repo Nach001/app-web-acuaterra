@@ -1,9 +1,6 @@
 import type { FunctionComponent } from "react";
-//import Navbar from "../ui/navBar/navbar";
-
 // eslint-disable-next-line no-duplicate-imports
 import type { ReactNode } from "react";
-//import Sidebar from "../ui/navBar/sidebar";
 
 interface LayoutProps {
 	children: ReactNode;
@@ -11,11 +8,15 @@ interface LayoutProps {
 
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
 	return (
-		<div className="flex flex-col min-h-screen">
-			 {/*<Sidebar /> */}
-			 <div className="flex-1 flex flex-col">
-				 {/*<Navbar />*/}
-				 <main className="flex-1 p-4">{children}</main>
+		<div className="flex min-h-screen">
+			{/* Si decides volver a usar el Sidebar, descomenta la línea siguiente */}
+			{/* <Sidebar /> */}
+
+			<div className="flex flex-col flex-1">
+				{/* Si decides volver a usar el Navbar, descomenta la línea siguiente */}
+				{/* <Navbar /> */}
+
+				<main className="flex-1 p-4">{children}</main>
 			</div>
 		</div>
 	);
