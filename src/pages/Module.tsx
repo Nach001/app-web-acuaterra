@@ -39,6 +39,7 @@ export const Module: FunctionComponent = () => {
   const [selectedModule, setSelectedModule] = useState<ModuleType>({} as ModuleType);
   const [searchTerm, setSearchTerm] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState(""); // Estado para el mensaje del toast
 
   const handleEdit = (module: ModuleType): void => {
     setSelectedModule(module);
@@ -47,8 +48,13 @@ export const Module: FunctionComponent = () => {
   };
 
   const handleDelete = async (moduleId: number): Promise<void> => {
-    await deleteModule(moduleId);
-    setReload(!reload);
+    const confirmDelete = window.confirm("¿Desea borrar este módulo?");
+    if (confirmDelete) {
+      await deleteModule(moduleId);
+      setReload(!reload);
+      setToastMessage("Módulo eliminado exitosamente");
+      setShowToast(true); // Mostramos la notificación
+    }
   };
 
   const handleSave = async (moduleData: UpdateModuleRequest): Promise<void> => {
@@ -56,6 +62,8 @@ export const Module: FunctionComponent = () => {
       await updateModule(selectedModule.id_modulo, moduleData);
       setEditModalOpen(false);
       setReload(!reload);
+      setToastMessage("Módulo actualizado exitosamente");
+      setShowToast(true); // Mostramos la notificación
     }
   };
 
@@ -63,6 +71,7 @@ export const Module: FunctionComponent = () => {
     await createModule(moduleData);
     setCreateModalOpen(false);
     setReload(!reload);
+    setToastMessage("Módulo registrado exitosamente");
     setShowToast(true); // Mostramos la notificación
   };
 
@@ -114,7 +123,6 @@ export const Module: FunctionComponent = () => {
                 <img alt="Reporte" className="h-6 w-6 mr-2" src={reportIcon} />
                 <span className="font-bold">Reporte</span>
               </li>
-              
             </ul>
 
             {/* Grupo 2: "Cerrar Sesión" en bloque separado */}
@@ -130,7 +138,6 @@ export const Module: FunctionComponent = () => {
               </ul>
             </div>
           </nav>
-
 
           {/* Footer: Texto del footer subido un poco */}
           <div className="p-0 mt-4 md:mt-2">
@@ -174,7 +181,7 @@ export const Module: FunctionComponent = () => {
           {/* Toast de confirmación */}
           {showToast && (
             <Toast
-              message="Módulo registrado exitosamente"
+              message={toastMessage}
               onClose={() => { setShowToast(false); }}
             />
           )}

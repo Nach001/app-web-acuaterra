@@ -1,6 +1,6 @@
 import type React from "react";
 // eslint-disable-next-line no-duplicate-imports
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { UpdateModuleRequest, Module as ModuleType } from "../../../common/types";
 
 interface EditModuleModalProps {
@@ -18,6 +18,18 @@ const EditModuleModal: React.FC<EditModuleModalProps> = ({ isOpen, setIsOpen, mo
     const [edadPescados, setEdadPescados] = useState(module.edad_pescados);
     const [dimensiones, setDimensiones] = useState(module.dimensiones);
 
+    // UseEffect para actualizar el estado cuando el módulo cambia
+    useEffect(() => {
+        if (module) {
+            setNombre(module.nombre);
+            setUbicacion(module.ubicacion);
+            setEspeciePescados(module.especie_pescados);
+            setCantidadPescados(module.cantidad_pescados);
+            setEdadPescados(module.edad_pescados);
+            setDimensiones(module.dimensiones);
+        }
+    }, [module]);
+
     const handleSubmit = (event: React.FormEvent): void => {
         event.preventDefault();
         const updatedModuleData: UpdateModuleRequest = {
@@ -30,8 +42,8 @@ const EditModuleModal: React.FC<EditModuleModalProps> = ({ isOpen, setIsOpen, mo
             // eslint-disable-next-line camelcase
             edad_pescados: edadPescados,
             dimensiones,
-			// eslint-disable-next-line camelcase
-			id_persona: module.id_persona_modulo,
+            // eslint-disable-next-line camelcase
+            id_persona: module.id_persona_modulo,
         };
         onSave(updatedModuleData);
         setIsOpen(false);
